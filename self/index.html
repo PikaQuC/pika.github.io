@@ -472,26 +472,66 @@
             background: var(--highlight-color);
         }
 
-        /* --- 移动端适配 --- */
+        /* --- 手机端/移动端 全面适配优化 --- */
         @media (max-width: 768px) {
-            .hero-section { padding: 40px 20px; justify-content: center; text-align: center; }
-            .info-box { border-right: none; border-bottom: 4px solid var(--line-color); }
-            h1 { font-size: 16vw; }
-            .page-title { font-size: 15vw; }
-            .info-grid.lite-mode .value { font-size: 2rem; }
-            .link-item { font-size: 2rem; padding: 20px; }
-            .avatar-container { width: 200px; height: 200px; }
-            .highlight:hover, .highlight-yellow:hover, .link-item:hover, .info-box:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0px var(--text-color); }
-            .cta-btn { font-size: 1.8rem; border-width: 4px; }
+            /* 导航栏竖向排列紧凑居中 */
+            header { flex-direction: column; align-items: center; gap: 15px; padding: 15px; }
+            .brand { font-size: 2rem; }
+            .status { font-size: 0.9rem; padding: 6px 12px; border-width: 2px; box-shadow: 2px 2px 0px var(--text-color); }
+
+            /* 走马灯缩小字号与间距 */
+            .marquee-item { font-size: 1.5rem; padding: 10px 0; gap: 10px; }
+
+            /* 首屏重排为垂直居中堆叠 */
+            .hero-section { padding: 40px 20px; flex-direction: column; text-align: center; gap: 40px; }
+            h1 { font-size: 18vw; text-shadow: 2px 2px 0px var(--bg-color), 5px 5px 0px var(--text-color); }
             
-            /* Galgame 移动端适配 */
-            .gal-status { font-size: 1rem; padding: 10px; flex-wrap: wrap; justify-content: center; gap: 10px; }
-            .gal-text { font-size: 1.2rem; padding: 15px; }
-            .gal-btn { font-size: 1.2rem; padding: 10px 0; border-right: 4px solid var(--text-color); }
-            .galgame-container { height: 500px; }
-            .gal-choices { flex-wrap: wrap; }
-            .gal-btn { flex: 1 1 50%; border-bottom: 4px solid var(--text-color); }
+            /* 头像缩小并自动适应屏幕并排 */
+            .avatars-group { gap: 25px; }
+            .avatar-container { width: 140px; height: 140px; border-width: 5px; box-shadow: 8px 8px 0px var(--text-color); border-radius: 25px; }
+            .avatar-container svg { width: 100px; height: 100px; }
+            .click-hint, .breeder-hint { font-size: 0.9rem; padding: 3px 8px; border-width: 2px; }
+            .click-hint { top: -15px; right: -15px; }
+            .breeder-hint { top: -15px; left: -15px; }
+
+            /* 信息卡片间距调整 */
+            .info-box { border-right: none; border-bottom: 4px solid var(--line-color); padding: 30px 20px; min-height: auto; }
+            .info-grid.lite-mode .value { font-size: 2.2rem; }
+            .info-grid.lite-mode .label { font-size: 14px; margin-bottom: 10px; }
+            .info-grid.lite-mode .description { font-size: 1rem; line-height: 1.4; }
+
+            /* 链接列表缩小边距与字号 */
+            .link-item { font-size: 1.6rem; padding: 25px 20px; gap: 15px; border-bottom-width: 3px; }
+            .link-item::after { width: 20px; height: 20px; right: 20px; border-width: 4px; }
+
+            /* 画廊与通用头部适配 */
+            .page-header { padding: 40px 20px; }
+            .page-title { font-size: 15vw; text-shadow: 2px 2px 0px var(--highlight-color); }
+            .back-nav { padding: 15px 20px; }
+            .back-btn { font-size: 1.2rem; gap: 5px; }
+            .back-btn::before { font-size: 1.5rem; }
+
+            /* 画廊项目：移动端由于无悬停效果，默认直接展示文字底栏 */
+            .work-preview { font-size: 2.5rem; }
+            .work-preview i { font-size: 4rem !important; }
+            .work-info { transform: translateY(0); padding: 15px; flex-direction: column; align-items: flex-start; gap: 8px; border-top-width: 2px; }
+            
+            /* 交互悬停效果弱化，防手机端误触和抖动 */
+            .highlight:hover, .highlight-yellow:hover, .link-item:hover, .info-box:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0px var(--text-color); }
+
+            /* Galgame 移动端专门适配 */
+            .galgame-container { height: auto; min-height: 500px; border-width: 5px; box-shadow: 8px 8px 0px var(--text-color); border-radius: 15px; }
+            .gal-status { font-size: 0.9rem; padding: 10px; flex-wrap: wrap; justify-content: center; gap: 8px; border-bottom-width: 5px; }
+            .gal-avatar-wrap svg { width: 160px; height: 160px; }
+            .gal-dialog-box { min-height: 140px; border-top-width: 5px; }
+            .gal-text { font-size: 1.1rem; padding: 15px; line-height: 1.4; }
+            
+            /* Galgame 选项按钮化为完美的 2x2 网格 */
+            .gal-choices { flex-wrap: wrap; border-top-width: 4px; }
+            .gal-btn { flex: 1 1 50%; font-size: 1.2rem; padding: 12px 0; border-bottom: 4px solid var(--text-color); box-sizing: border-box; }
+            .gal-btn:nth-child(odd) { border-right: 4px solid var(--text-color); }
             .gal-btn:nth-child(even) { border-right: none; }
+            .gal-btn:nth-last-child(-n+2) { border-bottom: none; }
         }
     </style>
 </head>
