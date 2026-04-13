@@ -67,6 +67,12 @@
         .option-card:active {
             transform: scale(0.98);
         }
+        
+        .option-selected {
+            border-color: #ec4899 !important;
+            background: #fdf2f8 !important;
+            box-shadow: 4px 4px 0px #ec4899 !important;
+        }
 
         ::-webkit-scrollbar { width: 0px; }
 
@@ -138,10 +144,10 @@
             </span>
         </div>
         <div class="bg-white/90 backdrop-blur-sm border-b-4 border-pink-400 px-4 py-3 flex justify-between items-center shadow-md">
-            <div class="font-black text-lg md:text-xl text-pink-600 flex items-center gap-2">
+            <div class="font-black text-lg md:text-xl text-pink-600 flex items-center gap-2 cursor-pointer" onclick="renderStart()">
                 <span class="shake-crazy">🐶</span> 小兽太图鉴 V11.0 抽卡版
             </div>
-            <div id="question-counter" class="bg-pink-500 text-white px-3 py-1 rounded-full font-black text-sm shadow-[2px_2px_0px_#831843]"></div>
+            <div id="question-counter" class="bg-pink-500 text-white px-3 py-1 rounded-full font-black text-sm shadow-[2px_2px_0px_#831843]" style="display: none;"></div>
         </div>
     </header>
 
@@ -151,11 +157,9 @@
     <!-- 底部版权与赞助信息 -->
     <footer class="w-full text-center py-4 bg-white/90 backdrop-blur-sm border-t-4 border-pink-400 relative z-40 text-sm font-black text-slate-700 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] mt-auto">
         <div class="flex flex-col md:flex-row justify-center items-center gap-3 md:gap-6">
-            <!-- 替换 href 里的链接为你实际的抖音主页链接 -->
-            <a href=" https://v.douyin.com/etZxUXNpIuQ/ 7@5.com :5pm" target="_blank" class="hover:text-pink-500 hover:-translate-y-1 transition-all flex items-center gap-1 bg-pink-50 px-4 py-1.5 rounded-full border-2 border-pink-200 shadow-sm">
+            <a href="https://v.douyin.com/etZxUXNpIuQ/ 7@5.com :5pm" target="_blank" class="hover:text-pink-500 hover:-translate-y-1 transition-all flex items-center gap-1 bg-pink-50 px-4 py-1.5 rounded-full border-2 border-pink-200 shadow-sm">
                 🎨 制作人：皮卡
             </a>
-            <!-- 替换 href 里的链接为你实际的赞助商/店铺链接 -->
             <a href="https://qm.qq.com/q/dCx7cuvxXG" target="_blank" class="hover:text-blue-500 hover:-translate-y-1 transition-all flex items-center gap-1 bg-blue-50 px-4 py-1.5 rounded-full border-2 border-blue-200 shadow-sm">
                 👕 赞助：索狛睡衣铺
             </a>
@@ -303,30 +307,32 @@
 
         const resultTypes = {
             // R级区
-            "DPME": { tier: "R", prob: "9.8%", name: "极度缺爱嘤嘤怪🥺", color: "bg-stone-400", icon: "🐾", diag: "重度『情感饥渴症』晚期，体内绿茶素超标，存在严重的依赖转移倾向。", action: "你的纯良掩盖不住你那泛滥成灾的玉玉症！你是个极度缺乏安全感的粘人精，每天除了在群里发“呜呜呜没人在乎我”就是在私聊里疯狂嘤嘤嘤。因为本身没啥心机又极度倒贴，很容易成为别人的赛博宠物。只要给你一口饭吃，摸摸头，你连灵魂都能卖，一不理你就会开始自闭。", advice: "收起眼泪！互联网上没人真的心疼赛博眼泪。建议找个坚固的赛博电子厂上班，用高强度的打螺丝来治愈你的emo。" },
-            "CPTE": { tier: "R", prob: "9.2%", name: "苦情委屈小流浪🌧️", color: "bg-zinc-500", icon: "🐱", diag: "经鉴定：患有极重度『赛博被害妄想症』及『死要面子活受罪候群』。", action: "你就像雨天被关在门外的小野猫，又纯又惨！你内心极度渴望被关爱，但长了一张死鸭子嘴硬的脸。被群友欺负了，只会死死咬住嘴唇不让自己哭出声，躲在角落阴暗发霉，发仅自己可见的emo小作文。因为太傻白甜，经常成为群聊老油条的恶作剧对象。", advice: "别装硬汉了！你的逞强在别人眼里就像小护食一样可笑。遇到事别憋着，赶紧找个接盘你的大哥哭诉吧。" },
-            "DPTE": { tier: "R", prob: "8.7%", name: "孤僻流浪小刺猬🗑️", color: "bg-slate-500", icon: "🦔", diag: "重度社恐！『防卫性孤立综合征』，内心戏丰富但表达能力极差。", action: "你像缩在垃圾桶里的流浪小动物。你很单纯，但因为自闭和极度社恐，把所有试图靠近的人都扎出血。每天在阴暗角落独自 emo，一边渴望被领养，一边又在别人伸手时亮爪子。内心弹幕永远是：“别碰我！我脏！”但别人真的走开了，半夜又偷偷掉眼泪。", advice: "再这么别扭下去，真的会孤独终老发霉长毛的。试着收起刺，给别人一个靠近你的机会，哪怕只是发个“早”。" },
-            "CPTS": { tier: "R", prob: "8.3%", name: "炸毛纸老虎猫猫🐈", color: "bg-amber-500", icon: "💥", diag: "外强中干典型病例！『虚假防御机制过载』伴随『晚期傲娇癌』。", action: "传说中的“一碰就哈人，再碰就倒地”纸老虎！心里像白纸一样单纯，但为了保护自己天天装出“莫挨老子”的狂暴姿态。在群里总是怼天怼地，但别人强硬一点把你按住撸两把，你马上就会舒服得打呼噜。死傲娇说的就是你，浑身只有嘴是硬的，其实是个一推就倒的软蛋。", advice: "防御对老涩批形同虚设，反而是欲拒还迎。放弃抵抗坦诚地喵一声，别人给你的罐头会更多。" },
+            "DPME": { tier: "R", prob: "15.8%", name: "极度缺爱嘤嘤怪🥺", color: "bg-stone-400", icon: "🐾", diag: "重度『情感饥渴症』晚期，体内绿茶素超标，存在严重的依赖转移倾向。", action: "你的纯良掩盖不住你那泛滥成灾的玉玉症！你是个极度缺乏安全感的粘人精，每天除了在群里发“呜呜呜没人在乎我”就是在私聊里疯狂嘤嘤嘤。因为本身没啥心机又极度倒贴，很容易成为别人的赛博宠物。只要给你一口饭吃，摸摸头，你连灵魂都能卖，一不理你就会开始自闭。", advice: "收起眼泪！互联网上没人真的心疼赛博眼泪。建议找个坚固的赛博电子厂上班，用高强度的打螺丝来治愈你的emo。" },
+            "CPTE": { tier: "R", prob: "14.2%", name: "苦情委屈小流浪🌧️", color: "bg-zinc-500", icon: "🐱", diag: "经鉴定：患有极重度『赛博被害妄想症』及『死要面子活受罪候群』。", action: "你就像雨天被关在门外的小野猫，又纯又惨！你内心极度渴望被关爱，但长了一张死鸭子嘴硬的脸。被群友欺负了，只会死死咬住嘴唇不让自己哭出声，躲在角落阴暗发霉，发仅自己可见的emo小作文。因为太傻白甜，经常成为群聊老油条的恶作剧对象。", advice: "别装硬汉了！你的逞强在别人眼里就像小护食一样可笑。遇到事别憋着，赶紧找个接盘你的大哥哭诉吧。" },
+            "DPTE": { tier: "R", prob: "12.7%", name: "孤僻流浪小刺猬🗑️", color: "bg-slate-500", icon: "🦔", diag: "重度社恐！『防卫性孤立综合征』，内心戏丰富但表达能力极差。", action: "你像缩在垃圾桶里的流浪小动物。你很单纯，但因为自闭和极度社恐，把所有试图靠近的人都扎出血。每天在阴暗角落独自 emo，一边渴望被领养，一边又在别人伸手时亮爪子。内心弹幕永远是：“别碰我！我脏！”但别人真的走开了，半夜又偷偷掉眼泪。", advice: "再这么别扭下去，真的会孤独终老发霉长毛的。试着收起刺，给别人一个靠近你的机会，哪怕只是发个“早”。" },
+            "CPTS": { tier: "R", prob: "11.3%", name: "炸毛纸老虎猫猫🐈", color: "bg-amber-500", icon: "💥", diag: "外强中干典型病例！『虚假防御机制过载』伴随『晚期傲娇癌』。", action: "传说中的“一碰就哈人，再碰就倒地”纸老虎！心里像白纸一样单纯，但为了保护自己天天装出“莫挨老子”的狂暴姿态。在群里总是怼天怼地，但别人强硬一点把你按住撸两把，你马上就会舒服得打呼噜。死傲娇说的就是你，浑身只有嘴是硬的，其实是个一推就倒的软蛋。", advice: "防御对老涩批形同虚设，反而是欲拒还迎。放弃抵抗坦诚地喵一声，别人给你的罐头会更多。" },
             
             // SR级区
-            "DPMS": { tier: "SR", prob: "7.8%", name: "无脑白给金毛🤤", color: "bg-yellow-400", icon: "🦮", diag: "警报！未发现任何智力活动痕迹，确认为『终极赛博菩萨（物理）』。", action: "你没有任何防备心，谁对你好一点你就恨不得把心肝脾肺肾都掏给人家。每天像个快乐的太阳花，毫无底线地疯狂倒贴白给。满脑子都是“贴贴”、“抱抱”，面对任何套路都照单全收，被卖了还笑呵呵帮人数钱。只要对方是个活的，就能摇着尾巴凑上去舔。", advice: "全网最好拐骗的野生小兽太，人贩子看到你都得笑醒。立刻下载国家反诈APP，离那些看着不像好人的大叔远一点！" },
-            "DPTS": { tier: "SR", prob: "7.2%", name: "阳光傲娇笨狗💢", color: "bg-orange-400", icon: "🐕", diag: "经赛博精神科鉴定：患有重度『心口不一综合征』并伴有『单细胞生物退化倾向』。", action: "纯纯的热血笨蛋！嘴上喊着日天日地，其实脑子里一根筋，不懂成年人的弯弯绕绕。喜欢装出“我很凶”的样子，实际上别人扔个骨头夸两句，尾巴摇得能发电。被欺负了只会无能狂怒敲键盘，但在现实里被揉脑袋时又会舒服得眯起眼睛，又菜又爱叫。", advice: "对付你只需一招：不管怎么呲牙咧嘴，强行抱住狂撸，你马上停止思考并沦陷。建议每天服用三次『认清自己是个笨比』胶囊。" },
-            "CPME": { tier: "SR", prob: "6.7%", name: "没骨头的废柴软猫🫠", color: "bg-blue-300", icon: "💧", diag: "查无此骨！极度缺乏独立生存能力，确诊『巨婴式依恋障碍』。", action: "患有重度玉玉症的无骨软体生物！没有任何攻击性，遇到困难唯一反应是往地上一躺掉小珍珠。极度依赖他人，恨不得一天24小时挂在别人身上当赛博挂件，没人理就会开始阴暗爬行。纯粹的战五渣，除了会软绵绵撒娇和哭泣外一无是处。", advice: "眼泪和软弱极易激起保护欲，但也极其容易激起施虐狂的欺凌欲。建议买个赛博轮椅，毕竟你根本站不起来。" },
-            "CPMS": { tier: "SR", prob: "6.2%", name: "夹子音绿茶小布偶🍵", color: "bg-emerald-400", icon: "🎀", diag: "高段位绿茶！『心机媚男/女症』确诊，熟练掌握《赛博钓鱼学》。 ", action: "纯纯的“心机”小傻子！虽然脑子没什么黄黑废料，但天生就知道怎么利用可爱的设定骗吃骗喝。每天在群里发卖萌表情包，用夹子音疯狂白给，游刃有余地在大佬之间骗宠爱。装作不经意地发腿照配文“今天好累”，实际上就是在等鱼儿上钩。", advice: "你不是渣，你只是想给所有哥哥一个家！但常在河边走哪有不湿鞋，小心哪天翻车被“哥哥们”联合制裁。" },
+            "DPMS": { tier: "SR", prob: "8.8%", name: "无脑白给金毛🤤", color: "bg-yellow-400", icon: "🦮", diag: "警报！未发现任何智力活动痕迹，确认为『终极赛博菩萨（物理）』。", action: "你没有任何防备心，谁对你好一点你就恨不得把心肝脾肺肾都掏给人家。每天像个快乐的太阳花，毫无底线地疯狂倒贴白给。满脑子都是“贴贴”、“抱抱”，面对任何套路都照单全收，被卖了还笑呵呵帮人数钱。只要对方是个活的，就能摇着尾巴凑上去舔。", advice: "全网最好拐骗的野生小兽太，人贩子看到你都得笑醒。立刻下载国家反诈APP，离那些看着不像好人的大叔远一点！" },
+            "DPTS": { tier: "SR", prob: "8.2%", name: "阳光傲娇笨狗💢", color: "bg-orange-400", icon: "🐕", diag: "经赛博精神科鉴定：患有重度『心口不一综合征』并伴有『单细胞生物退化倾向』。", action: "纯纯的热血笨蛋！嘴上喊着日天日地，其实脑子里一根筋，不懂成年人的弯弯绕绕。喜欢装出“我很凶”的样子，实际上别人扔个骨头夸两句，尾巴摇得能发电。被欺负了只会无能狂怒敲键盘，但在现实里被揉脑袋时又会舒服得眯起眼睛，又菜又爱叫。", advice: "对付你只需一招：不管怎么呲牙咧嘴，强行抱住狂撸，你马上停止思考并沦陷。建议每天服用三次『认清自己是个笨比』胶囊。" },
+            "CPME": { tier: "SR", prob: "7.7%", name: "没骨头的废柴软猫🫠", color: "bg-blue-300", icon: "💧", diag: "查无此骨！极度缺乏独立生存能力，确诊『巨婴式依恋障碍』。", action: "患有重度玉玉症的无骨软体生物！没有任何攻击性，遇到困难唯一反应是往地上一躺掉小珍珠。极度依赖他人，恨不得一天24小时挂在别人身上当赛博挂件，没人理就会开始阴暗爬行。纯粹的战五渣，除了会软绵绵撒娇和哭泣外一无是处。", advice: "眼泪和软弱极易激起保护欲，但也极其容易激起施虐狂的欺凌欲。建议买个赛博轮椅，毕竟你根本站不起来。" },
+            "CPMS": { tier: "SR", prob: "7.2%", name: "夹子音绿茶小布偶🍵", color: "bg-emerald-400", icon: "🎀", diag: "高段位绿茶！『心机媚男/女症』确诊，熟练掌握《赛博钓鱼学》。 ", action: "纯纯的“心机”小傻子！虽然脑子没什么黄黑废料，但天生就知道怎么利用可爱的设定骗吃骗喝。每天在群里发卖萌表情包，用夹子音疯狂白给，游刃有余地在大佬之间骗宠爱。装作不经意地发腿照配文“今天好累”，实际上就是在等鱼儿上钩。", advice: "你不是渣，你只是想给所有哥哥一个家！但常在河边走哪有不湿鞋，小心哪天翻车被“哥哥们”联合制裁。" },
 
             // SSR级区
-            "CSTS": { tier: "SSR", prob: "5.7%", name: "嚣张雌小鬼本鬼🤡", color: "bg-fuchsia-500", icon: "💅", diag: "极度欠撅！确诊为『重度嘲讽成瘾』合并『作死无底线症』。", action: "“杂鱼~大叔~这就受不了了？”全网最欠撅的赛博雌小鬼！满脑子花花肠子，最喜欢用嚣张的态度挑逗嘲讽别人。仗着自己身娇体弱疯狂作死，在发癫和被爆金币的边缘横跳。明知道会被教训，但管不住那张犯贱的嘴，最爱看别人气急败坏又拿你没办法的样子。", advice: "这辈子最大的归宿，就是惹错了人，被忍无可忍的大哥按在床上狠狠惩罚，直到哭着求饶叫爸爸！这就是你的最终下场！" },
-            "DSTS": { tier: "SSR", prob: "5.1%", name: "发情小疯狗🔥", color: "bg-red-500", icon: "🐺", diag: "高危预警！『黄体酮/睾酮分泌异常』合并『重度社交狂热症』，破坏力极强。", action: "纯度极高！满脑子废料、精力旺盛且极具攻击性的哈士奇！每天在群里上蹿下跳疯狂开黄腔到处挑衅。嘴硬得要命，但凡有人敢撅你，你叫唤得比谁都大声。那种“又菜又爱玩，又色又爱跳”的究极乐子人，哪怕被人按在地上摩擦，嘴里还要喊“就这？”", advice: "对付你这种人最好的办法就是顺着网线物理阉割。赛博互联网没有你得少一半乐子，但也因为你多了一半污染源。" },
-            "DSME": { tier: "SSR", prob: "4.6%", name: "阴暗卑微字母狗🧎", color: "bg-slate-700", icon: "🗑️", diag: "病态受虐狂！确诊为『深渊级斯德哥尔摩综合征』及『尊严丧失症候群』。", action: "把姿态低到尘埃里的重量级抖M！满脑子废料偏偏有一颗阴暗玉玉的心。最享受被狠狠辱骂、贬低和踩在脚底，只有被当成垃圾对待才能感受到活着。每天深夜偷偷翻重口本子代入受方。别人对你好你会害怕，别人骂你“废物”反而会兴奋地发抖。", advice: "没啥好说的，尊重，祝福，建议锁死。既然这么喜欢当垃圾桶，请务必找一个有素质的“垃圾分类员”回收利用。" },
-            "CSTE": { tier: "SSR", prob: "4.1%", name: "腹黑冰山小毒舌🧊", color: "bg-indigo-600", icon: "😈", diag: "精神SM爱好者！『冷血施虐狂倾向』与『高智商犯罪潜力』持有者。", action: "用最冰冷的表情说出最下流话语的腹黑猫！性格孤僻阴冷，但脑子里的废料比谁都多。最喜欢站在道德高地冷冷嘲讽别人，三言两语把别人内裤扒光。极致的控制狂兼精神施虐者，不喜欢身体接触，就喜欢看别人因为毒舌而破防、无地自容的样子，反派小恶魔。", advice: "毒舌是你最强的武器，但也容易注孤生。建议去学法学，当个无良律师绝对能发挥最大毒性。" },
+            "CSTS": { tier: "SSR", prob: "4.7%", name: "嚣张雌小鬼本鬼🤡", color: "bg-fuchsia-500", icon: "💅", diag: "极度欠撅！确诊为『重度嘲讽成瘾』合并『作死无底线症』。", action: "“杂鱼~大叔~这就受不了了？”全网最欠撅的赛博雌小鬼！满脑子花花肠子，最喜欢用嚣张的态度挑逗嘲讽别人。仗着自己身娇体弱疯狂作死，在发癫和被爆金币的边缘横跳。明知道会被教训，但管不住那张犯贱的嘴，最爱看别人气急败坏又拿你没办法的样子。", advice: "这辈子最大的归宿，就是惹错了人，被忍无可忍的大哥按在床上狠狠惩罚，直到哭着求饶叫爸爸！这就是你的最终下场！" },
+            "DSTS": { tier: "SSR", prob: "4.1%", name: "发情小疯狗🔥", color: "bg-red-500", icon: "🐺", diag: "高危预警！『黄体酮/睾酮分泌异常』合并『重度社交狂热症』，破坏力极强。", action: "纯度极高！满脑子废料、精力旺盛且极具攻击性的哈士奇！每天在群里上蹿下跳疯狂开黄腔到处挑衅。嘴硬得要命，但凡有人敢撅你，你叫唤得比谁都大声。那种“又菜又爱玩，又色又爱跳”的究极乐子人，哪怕被人按在地上摩擦，嘴里还要喊“就这？”", advice: "对付你这种人最好的办法就是顺着网线物理阉割。赛博互联网没有你得少一半乐子，但也因为你多了一半污染源。" },
+            "DSME": { tier: "SSR", prob: "3.6%", name: "阴暗卑微字母狗🧎", color: "bg-slate-700", icon: "🗑️", diag: "病态受虐狂！确诊为『深渊级斯德哥尔摩综合征』及『尊严丧失症候群』。", action: "把姿态低到尘埃里的重量级抖M！满脑子废料偏偏有一颗阴暗玉玉的心。最享受被狠狠辱骂、贬低和踩在脚底，只有被当成垃圾对待才能感受到活着。每天深夜偷偷翻重口本子代入受方。别人对你好你会害怕，别人骂你“废物”反而会兴奋地发抖。", advice: "没啥好说的，尊重，祝福，建议锁死。既然这么喜欢当垃圾桶，请务必找一个有素质的“垃圾分类员”回收利用。" },
+            "CSTE": { tier: "SSR", prob: "2.1%", name: "腹黑冰山小毒舌🧊", color: "bg-indigo-600", icon: "😈", diag: "精神SM爱好者！『冷血施虐狂倾向』与『高智商犯罪潜力』持有者。", action: "用最冰冷的表情说出最下流话语的腹黑猫！性格孤僻阴冷，但脑子里的废料比谁都多。最喜欢站在道德高地冷冷嘲讽别人，三言两语把别人内裤扒光。极致的控制狂兼精神施虐者，不喜欢身体接触，就喜欢看别人因为毒舌而破防、无地自容的样子，反派小恶魔。", advice: "毒舌是你最强的武器，但也容易注孤生。建议去学法学，当个无良律师绝对能发挥最大毒性。" },
 
             // UR级区
-            "DSMS": { tier: "UR", prob: "3.6%", name: "人形自走榨汁机💦", color: "bg-pink-500", icon: "🥵", diag: "逆天罕见病！大脑已被黄色废料腐蚀，『不知廉耻综合征』病入膏肓。", action: "彻底没救了！不仅脑子里全是废料，还是个极度阳光开朗的终极抖M白给怪！每天像个发情小泰迪抱着别人大腿狂蹭，甚至会在群里公然大喊“老公干碎我”。完全没有廉耻心，涩涩就是每天第一生产力。只要有人开黄腔，永远是冲最前面接梗的破烂电子榨汁机。", advice: "立刻穿上裤子！建议进行电子断网处理，让你在清心寡欲的现实生活中反思自己有多变态。" },
-            "DSTE": { tier: "UR", prob: "3.0%", name: "病娇地下室狂犬🔗", color: "bg-purple-700", icon: "⛓️", diag: "极度危险的UR！存在严重的『病态反社会人格』与『非法拘禁妄想』。", action: "脑子里装满了海棠都不让写的强制爱剧本。表面是个唯唯诺诺的阴暗修狗，背地里满脑子都是怎么把喜欢的大佬下药绑回地下室。内心戏极多，是个重度偏执狂，得不到就毁掉。如果在群里看到别人和你推贴贴，屏幕都会被盯出两个洞，脑内上演暗杀计划。", advice: "你的性癖已经触碰刑法边缘。请立刻停止脑内危险剧场，多看点《法治进行时》，或直接去赛博公安局自首。" },
-            "CSMS": { tier: "UR", prob: "2.4%", name: "诱惑心机小烧杯🍷", color: "bg-rose-500", icon: "🫦", diag: "传说级互联网妲己！体内荷尔蒙超载，确诊『重度海王综合征』。", action: "行走在互联网上的“魅魔兽太”！不仅满肚子坏水和废料，还是极度外向的发电机。表面装优雅高冷小猫咪，私下疯狂发自拍擦边图，明码标价钓鱼。享受被一群人围着叫“老婆”的虚荣感，池塘里养满各种鱼，只要有人敢上钩，就能榨得一滴不剩。顶级猎手！", advice: "海王也是会翻车的！请注意管理鱼塘水质，别哪天大鱼打起来把赛博池塘掀了。少发点擦边图，小心号没了！" },
-            "CSME": { tier: "UR", prob: "1.2%", name: "精神分裂病态猫娘🔪", color: "bg-gray-800 text-white", icon: "🩸", diag: "最重量级警告！多种精神疾病复合体，建议立刻送入ICU！", action: "恭喜抽到最恐怖的图鉴！一个极其复杂危险的病态缝合怪：既满脑废料又极度自闭，既渴望白给被调教，又会在半夜突然玉玉发作想拉全人类毁灭。一会儿要拿刀杀人，一会儿又跪在地上求踩。情绪比过山车还刺激，群友每天心惊胆战猜你今天忘了吃什么药。", advice: "你的存在本身就是互联网的一颗定时炸弹。除了建议你去挂个精神科专家号之外，我也没什么好说的了。阿弥陀佛。" }
+            "DSMS": { tier: "UR", prob: "0.6%", name: "人形自走榨汁机💦", color: "bg-pink-500", icon: "🥵", diag: "逆天罕见病！大脑已被黄色废料腐蚀，『不知廉耻综合征』病入膏肓。", action: "彻底没救了！不仅脑子里全是废料，还是个极度阳光开朗的终极抖M白给怪！每天像个发情小泰迪抱着别人大腿狂蹭，甚至会在群里公然大喊“老公干碎我”。完全没有廉耻心，涩涩就是每天第一生产力。只要有人开黄腔，永远是冲最前面接梗的破烂电子榨汁机。", advice: "立刻穿上裤子！建议进行电子断网处理，让你在清心寡欲的现实生活中反思自己有多变态。" },
+            "DSTE": { tier: "UR", prob: "0.4%", name: "病娇地下室狂犬🔗", color: "bg-purple-700", icon: "⛓️", diag: "极度危险的UR！存在严重的『病态反社会人格』与『非法拘禁妄想』。", action: "脑子里装满了海棠都不让写的强制爱剧本。表面是个唯唯诺诺的阴暗修狗，背地里满脑子都是怎么把喜欢的大佬下药绑回地下室。内心戏极多，是个重度偏执狂，得不到就毁掉。如果在群里看到别人和你推贴贴，屏幕都会被盯出两个洞，脑内上演暗杀计划。", advice: "你的性癖已经触碰刑法边缘。请立刻停止脑内危险剧场，多看点《法治进行时》，或直接去赛博公安局自首。" },
+            "CSMS": { tier: "UR", prob: "0.3%", name: "诱惑心机小烧杯🍷", color: "bg-rose-500", icon: "🫦", diag: "传说级互联网妲己！体内荷尔蒙超载，确诊『重度海王综合征』。", action: "行走在互联网上的“魅魔兽太”！不仅满肚子坏水和废料，还是极度外向的发电机。表面装优雅高冷小猫咪，私下疯狂发自拍擦边图，明码标价钓鱼。享受被一群人围着叫“老婆”的虚荣感，池塘里养满各种鱼，只要有人敢上钩，就能榨得一滴不剩。顶级猎手！", advice: "海王也是会翻车的！请注意管理鱼塘水质，别哪天大鱼打起来把赛博池塘掀了。少发点擦边图，小心号没了！" },
+            "CSME": { tier: "UR", prob: "0.1%", name: "精神分裂病态猫娘🔪", color: "bg-gray-800 text-white", icon: "🩸", diag: "最重量级警告！多种精神疾病复合体，建议立刻送入ICU！", action: "恭喜抽到最恐怖的图鉴！一个极其复杂危险的病态缝合怪：既满脑废料又极度自闭，既渴望白给被调教，又会在半夜突然玉玉发作想拉全人类毁灭。一会儿要拿刀杀人，一会儿又跪在地上求踩。情绪比过山车还刺激，群友每天心惊胆战猜你今天忘了吃什么药。", advice: "你的存在本身就是互联网的一颗定时炸弹。除了建议你去挂个精神科专家号之外，我也没什么好说的了。阿弥陀佛。" }
         };
 
+        // 新增：记录每一题用户的选择
+        let userAnswers = new Array(quizData.length).fill(null);
         let currentQuestionIndex = 0;
         let scores = { D: 0, C: 0, P: 0, S: 0, T: 0, M: 0, Sun: 0, Emo: 0 };
         const appContainer = document.getElementById('app-container');
@@ -354,12 +360,17 @@
                     </p>
                     <div class="text-slate-600 mb-8 font-bold text-sm bg-pink-50 p-4 rounded-xl border-2 border-pink-200 text-left leading-relaxed">
                         <p class="mb-2">🥵 直面最肮脏的性癖！鉴定你的专属精神病历！</p>
-                        <p class="mb-2">📊 已接入全网大数据，测出你的<span class="text-purple-600 font-black">真实发病概率</span>！</p>
-                        <p>✨ 看看你是随处可见的量产型，还是全网仅占 1.2% 的<span class="text-red-500 font-black">传说级变态 UR</span>？</p>
+                        <p class="mb-2">📊 已重写判定算法：拒绝“半吊子变态”！</p>
+                        <p>✨ 看看你是随处可见的量产型，还是千中无一的<span class="text-red-500 font-black">究极变态 UR</span>？</p>
                     </div>
-                    <button onclick="startQuiz()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-black py-4 px-8 rounded-2xl transition-transform border-b-8 border-pink-700 hover:border-pink-600 hover:translate-y-2 text-lg md:text-xl tracking-wider active:border-b-0 active:translate-y-4">
-                        👉 立即扒光底裤 👈
-                    </button>
+                    <div class="space-y-4">
+                        <button onclick="startQuiz()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-black py-4 px-8 rounded-2xl transition-transform border-b-8 border-pink-700 hover:border-pink-600 hover:translate-y-2 text-lg md:text-xl tracking-wider active:border-b-0 active:translate-y-4">
+                            👉 立即扒光底裤 👈
+                        </button>
+                        <button onclick="renderDictionary()" class="w-full bg-white hover:bg-slate-50 text-slate-700 font-black py-3 px-8 rounded-2xl transition-transform border-2 border-slate-300 hover:border-pink-400 hover:text-pink-600 text-base shadow-sm">
+                            📖 查看全图鉴
+                        </button>
+                    </div>
                 </div>
             `;
             animateRender(html);
@@ -368,7 +379,7 @@
         function startQuiz() {
             counterEl.style.display = 'block';
             currentQuestionIndex = 0;
-            scores = { D: 0, C: 0, P: 0, S: 0, T: 0, M: 0, Sun: 0, Emo: 0 };
+            userAnswers = new Array(quizData.length).fill(null); // 清空答题记录
             renderQuestion();
         }
 
@@ -376,6 +387,9 @@
             const q = quizData[currentQuestionIndex];
             const progress = ((currentQuestionIndex) / quizData.length) * 100;
             counterEl.innerText = `第 ${currentQuestionIndex + 1} 题 / 共 20 题`;
+            
+            // 获取当前题目的已选项（如果有的话）
+            const currentSelected = userAnswers[currentQuestionIndex];
 
             const html = `
                 <div class="max-w-xl w-full">
@@ -392,13 +406,25 @@
                         
                         <div class="space-y-4 md:space-y-5">
                             ${q.options.map((opt) => {
+                                const isSelected = currentSelected === opt.type;
                                 return `
                                 <button onclick="selectOption('${opt.type}')"
-                                    class="option-card w-full text-left p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 cursor-pointer">
+                                    class="option-card w-full text-left p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 cursor-pointer ${isSelected ? 'option-selected' : ''}">
                                     <span class="text-2xl md:text-3xl bg-slate-100 p-2 rounded-full border-2 border-slate-300 shrink-0">${opt.icon}</span>
                                     <span class="text-sm md:text-base text-slate-700 font-bold leading-relaxed">${opt.text}</span>
                                 </button>
                             `}).join('')}
+                        </div>
+                        
+                        <!-- 导航按钮区：上一题 / 下一题 -->
+                        <div class="mt-8 flex justify-between items-center border-t-2 border-slate-100 pt-4">
+                            ${currentQuestionIndex > 0 
+                                ? `<button onclick="prevQuestion()" class="text-slate-500 hover:text-pink-500 font-bold flex items-center gap-1 transition-colors px-4 py-2 rounded-lg hover:bg-pink-50">⬅️ 上一题</button>` 
+                                : `<div></div>`}
+                                
+                            ${currentSelected !== null 
+                                ? `<button onclick="nextQuestion()" class="bg-pink-100 text-pink-600 hover:bg-pink-200 font-bold flex items-center gap-1 transition-colors px-6 py-2 rounded-xl">下一题 ➡️</button>` 
+                                : `<div></div>`}
                         </div>
                     </div>
                 </div>
@@ -407,13 +433,40 @@
         }
 
         function selectOption(type) {
-            scores[type]++;
-            currentQuestionIndex++;
-            if (currentQuestionIndex < quizData.length) {
+            // 记录当前选择
+            userAnswers[currentQuestionIndex] = type;
+            
+            // 视觉反馈一下，然后自动跳转下一题
+            setTimeout(() => {
+                nextQuestion();
+            }, 150);
+        }
+        
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
                 renderQuestion();
-            } else {
-                renderResult();
             }
+        }
+        
+        function nextQuestion() {
+            if (userAnswers[currentQuestionIndex] !== null) {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizData.length) {
+                    renderQuestion();
+                } else {
+                    calculateScoresAndRenderResult();
+                }
+            }
+        }
+
+        function calculateScoresAndRenderResult() {
+            // 重置分数，通过 userAnswers 数组重新计算
+            scores = { D: 0, C: 0, P: 0, S: 0, T: 0, M: 0, Sun: 0, Emo: 0 };
+            userAnswers.forEach(ans => {
+                if (ans) scores[ans]++;
+            });
+            renderResult();
         }
 
         function createBar(label1, k1, k2, label2, color) {
@@ -437,27 +490,47 @@
             `;
         }
 
- function renderResult() {
+        function renderResult() {
             counterEl.style.display = 'none';
             
-            // 1. 计算四个维度的最终偏向
-            // D vs C (舔狗 vs 傲娇)
-            const r1 = scores.D >= scores.C ? 'D' : 'C';
+            const r1 = scores.D > scores.C ? 'D' : 'C';
+            const r2 = scores.P > scores.S ? 'P' : 'S';
+            const r3 = scores.T > scores.M ? 'T' : 'M';
+            const r4 = scores.Sun > scores.Emo ? 'Sun' : 'Emo';
             
-            // P vs S (纯洁 vs 涩涩)
-            const r2 = scores.P >= scores.S ? 'P' : 'S';
+            const codeR4 = r4 === 'Sun' ? 'S' : 'E';
+            let finalCode = r1 + r2 + r3 + codeR4;
             
-            // T vs M (嘴硬 vs 白给)
-            const r3 = scores.T >= scores.M ? 'T' : 'M';
-            
-            // Sun vs Emo (阳光 vs 阴暗) -> 对应字典里的 S 和 E
-            const r4 = scores.Sun >= scores.Emo ? 'S' : 'E';
-            
-            // 2. 组合成 4 位特征码 (例如: DPMS)
-            const finalCode = r1 + r2 + r3 + r4;
-            
-            // 3. 匹配对应的图鉴
-            const result = resultTypes[finalCode] || resultTypes["CSTS"];
+            // 降级系统
+            function applyDowngrade(code) {
+                if (code === 'DSMS') { 
+                    if (scores.S < 4) return 'DPMS';
+                    if (scores.M < 4) return 'DSTS';
+                }
+                if (code === 'CSMS') { 
+                    if (scores.S < 4) return 'CPMS';
+                    if (scores.C < 4) return 'DSMS';
+                }
+                if (code === 'DSTE') { 
+                    if (scores.Emo < 4) return 'DPTS';
+                    if (scores.T < 4) return 'DSME';
+                }
+                if (code === 'CSME') { 
+                    if (scores.Emo < 4) return 'CSTS';
+                    if (scores.S < 4) return 'CPME';
+                }
+                return code;
+            }
+
+            finalCode = applyDowngrade(finalCode);
+            finalCode = applyDowngrade(finalCode);
+
+            if (finalCode === 'DSTS' && scores.S < 4) finalCode = 'DPTS';
+            if (finalCode === 'DSME' && scores.M < 4) finalCode = 'DPME';
+            if (finalCode === 'CSTS' && scores.S < 3) finalCode = 'CPTS';
+            if (finalCode === 'CSTE' && scores.T < 3) finalCode = 'CPTE';
+
+            const result = resultTypes[finalCode] || resultTypes["CPME"];
             
             const html = `
                 <div class="max-w-xl w-full pb-10 mt-6">
@@ -480,7 +553,7 @@
                                 </span>
                             </div>
                             
-                            <h1 class="text-2xl md:text-4xl font-black text-white mt-2 drop-shadow-[2px_2px_0px_#000] tracking-wide relative z-10">${result.name}</h1>
+                            <h1 class="text-2xl md:text-4xl font-black ${result.color.includes('text-white') ? 'text-white' : 'text-white'} mt-2 drop-shadow-[2px_2px_0px_#000] tracking-wide relative z-10">${result.name}</h1>
                         </div>
                         
                         <div class="p-5 md:p-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIyIiBmaWxsPSJyZ2JhKDAsMCwwLDAuMDUpIi8+Cjwvc3ZnPg==')] space-y-6 md:space-y-8">
@@ -514,9 +587,14 @@
                                 <button onclick="copyResult()" id="share-btn" class="w-full bg-green-500 hover:bg-green-600 text-white font-black py-3 md:py-4 px-4 md:px-6 rounded-xl transition-transform border-b-4 border-green-700 hover:translate-y-1 active:border-b-0 active:translate-y-2 text-base md:text-lg flex justify-center items-center gap-2 shadow-lg">
                                     📢 炫耀你的 ${result.tier} 级精神病历！
                                 </button>
-                                <button onclick="startQuiz()" class="w-full bg-white hover:bg-slate-100 text-slate-700 font-black py-3 px-6 rounded-xl transition-colors border-2 border-slate-300 shadow-md text-sm md:text-base">
-                                    庸医！我不服！重新鉴定！
-                                </button>
+                                <div class="flex gap-3">
+                                    <button onclick="startQuiz()" class="flex-1 bg-white hover:bg-slate-50 text-slate-700 font-black py-3 px-2 rounded-xl transition-colors border-2 border-slate-300 shadow-sm text-sm md:text-base">
+                                        重新鉴定
+                                    </button>
+                                    <button onclick="renderDictionary()" class="flex-1 bg-pink-100 hover:bg-pink-200 text-pink-600 font-black py-3 px-2 rounded-xl transition-colors border-2 border-pink-300 shadow-sm text-sm md:text-base">
+                                        📖 浏览全图鉴
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -525,6 +603,66 @@
             
             animateRender(html);
             window.currentResult = result;
+        }
+
+        // 渲染全图鉴查询页面
+        function renderDictionary() {
+            counterEl.style.display = 'none';
+            
+            // 按稀有度排序：UR -> SSR -> SR -> R
+            const tierOrder = { "UR": 4, "SSR": 3, "SR": 2, "R": 1 };
+            const sortedResults = Object.values(resultTypes).sort((a, b) => {
+                if (tierOrder[b.tier] !== tierOrder[a.tier]) {
+                    return tierOrder[b.tier] - tierOrder[a.tier];
+                }
+                return parseFloat(a.prob) - parseFloat(b.prob);
+            });
+
+            const html = `
+                <div class="max-w-4xl w-full pb-10">
+                    <div class="flex justify-between items-center mb-6 px-2">
+                        <h2 class="text-2xl md:text-3xl font-black text-pink-600 drop-shadow-sm flex items-center gap-2">
+                            📖 赛博病历全图鉴
+                        </h2>
+                        <button onclick="renderStart()" class="bg-white border-2 border-pink-300 text-pink-600 hover:bg-pink-50 font-bold py-2 px-4 rounded-xl shadow-sm transition-colors">
+                            ⬅️ 返回首页
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        ${sortedResults.map(res => `
+                            <div class="bg-white rounded-2xl p-5 border-4 border-slate-200 hover:border-pink-400 transition-colors shadow-md relative overflow-hidden flex flex-col">
+                                <!-- 背景光晕 -->
+                                <div class="absolute top-0 right-0 w-32 h-32 opacity-10 rounded-full blur-2xl -mr-10 -mt-10 ${res.color}"></div>
+                                
+                                <div class="flex justify-between items-start mb-3 relative z-10">
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-4xl bg-slate-50 p-2 rounded-xl border-2 border-slate-200 shadow-sm">${res.icon}</div>
+                                        <div>
+                                            <h3 class="font-black text-lg text-slate-800">${res.name}</h3>
+                                            <span class="text-xs font-bold text-slate-500">发病率: ${res.prob}</span>
+                                        </div>
+                                    </div>
+                                    <span class="tier-badge tier-${res.tier} text-xs transform scale-90 origin-top-right">${res.tier}</span>
+                                </div>
+                                
+                                <div class="text-sm text-slate-600 font-bold bg-slate-50 p-3 rounded-xl border border-slate-100 flex-grow relative z-10">
+                                    <span class="text-red-500 mr-1">诊断:</span>${res.diag}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-pink-500 font-bold text-sm bg-white px-4 py-2 rounded-full shadow-sm border border-slate-200">
+                            ⬆️ 回到顶部
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            animateRender(html);
+            window.scrollTo({top: 0});
         }
 
         function copyResult() {
@@ -563,4 +701,3 @@
     </script>
 </body>
 </html>
-
