@@ -437,18 +437,26 @@
             `;
         }
 
-        function renderResult() {
+ function renderResult() {
             counterEl.style.display = 'none';
             
-            const r1 = scores.D > scores.C ? 'D' : 'C';
-            const r2 = scores.P > scores.S ? 'P' : 'S';
-            const r3 = scores.T > scores.M ? 'T' : 'M';
-            const r4 = scores.Sun > scores.Emo ? 'Sun' : 'Emo';
+            // 1. 计算四个维度的最终偏向
+            // D vs C (舔狗 vs 傲娇)
+            const r1 = scores.D >= scores.C ? 'D' : 'C';
             
-            const codeR4 = r4 === 'Sun' ? 'S' : 'E';
-            const finalCode = r1 + r2 + r3 + codeR4;
+            // P vs S (纯洁 vs 涩涩)
+            const r2 = scores.P >= scores.S ? 'P' : 'S';
             
-            // 现在的 finalCode 绝对能百分之百精准命中 16 种图鉴之一，不会再出现找不到而使用雌小鬼兜底的情况。
+            // T vs M (嘴硬 vs 白给)
+            const r3 = scores.T >= scores.M ? 'T' : 'M';
+            
+            // Sun vs Emo (阳光 vs 阴暗) -> 对应字典里的 S 和 E
+            const r4 = scores.Sun >= scores.Emo ? 'S' : 'E';
+            
+            // 2. 组合成 4 位特征码 (例如: DPMS)
+            const finalCode = r1 + r2 + r3 + r4;
+            
+            // 3. 匹配对应的图鉴
             const result = resultTypes[finalCode] || resultTypes["CSTS"];
             
             const html = `
@@ -472,7 +480,7 @@
                                 </span>
                             </div>
                             
-                            <h1 class="text-2xl md:text-4xl font-black ${result.color.includes('text-white') ? 'text-white' : 'text-white'} mt-2 drop-shadow-[2px_2px_0px_#000] tracking-wide relative z-10">${result.name}</h1>
+                            <h1 class="text-2xl md:text-4xl font-black text-white mt-2 drop-shadow-[2px_2px_0px_#000] tracking-wide relative z-10">${result.name}</h1>
                         </div>
                         
                         <div class="p-5 md:p-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIyIiBmaWxsPSJyZ2JhKDAsMCwwLDAuMDUpIi8+Cjwvc3ZnPg==')] space-y-6 md:space-y-8">
