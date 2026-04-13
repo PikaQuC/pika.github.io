@@ -7,7 +7,6 @@
     <title>全网最缺德：赛博小兽太成分鉴定器 🥵</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 换回系统默认字体，保证阅读清晰度 */
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #ffe4e6;
@@ -116,12 +115,12 @@
     <header class="fixed top-0 w-full z-50">
         <div class="marquee-container text-sm md:text-base">
             <span class="marquee-text">
-                ⚠️ 警告：本测试极度缺德！测完如果破防概不负责！ 🥵 你的列表正在暗中观察你的性癖！ 💦 测完记得分享到群里公开处刑！ 🤡
+                ⚠️ 警告：本测试已加入防平局机制！这次你休想再隐瞒你真实的性癖！ 💦 测完记得分享到群里公开处刑！ 🤡
             </span>
         </div>
         <div class="bg-white/90 backdrop-blur-sm border-b-4 border-pink-400 px-4 py-3 flex justify-between items-center shadow-md">
             <div class="font-black text-lg md:text-xl text-pink-600 flex items-center gap-2">
-                <span class="shake-crazy">🐶</span> 小兽太图鉴 V9.5
+                <span class="shake-crazy">🐶</span> 小兽太图鉴 V10.0
             </div>
             <div id="question-counter" class="bg-pink-500 text-white px-3 py-1 rounded-full font-black text-sm shadow-[2px_2px_0px_#831843]"></div>
         </div>
@@ -131,8 +130,9 @@
     </main>
 
     <script>
+        // 升级为20题，确保每个维度5道题，彻底杜绝平局
         const quizData = [
-            // D/C 舔狗 vs 傲娇 (4选项)
+            // D/C 舔狗 vs 傲娇 (5题)
             { axis: "DC", question: "看到列表里的大佬/喜欢的兽太发了张超好看的自拍，你的第一反应？", options: [
                 { text: "“汪汪汪汪汪！老公/老婆踩我！狠狠撅我！” 直接扑上去狂舔。", type: "D", icon: "👅" },
                 { text: "秒赞秒评论转发三连：“太帅了/太可爱了！多发爱看！”", type: "D", icon: "🥺" },
@@ -157,8 +157,14 @@
                 { text: "瞪他一眼：“走路不长眼？离我远点。”", type: "C", icon: "🙄" },
                 { text: "“杂鱼也敢踩我？！”反手一脚猛踩回去以示威严。", type: "C", icon: "🦷" }
             ]},
+            { axis: "DC", question: "【防平局题】如果群里有人突然送了你一份很想要的礼物，你的反应是？", options: [
+                { text: "“哇！太爱你了！”直接发一万个磕头和狂亲的表情包。", type: "D", icon: "😭" },
+                { text: "极其感动，马上开始发愁要买什么同等价值的回礼。", type: "D", icon: "🎁" },
+                { text: "内心狂喜，但只轻飘飘地回一句：“谢了，破费。”", type: "C", icon: "☕" },
+                { text: "别扭地转过头：“哼，既然你非要送，那我就勉强收下吧。”", type: "C", icon: "撇嘴" }
+            ]},
 
-            // P/S 纯良 vs 满脑废料 (4选项)
+            // P/S 纯良 vs 满脑废料 (5题)
             { axis: "PS", question: "晚上一个人躲在被窝里看手机，大概率在干嘛？", options: [
                 { text: "听着白噪音/轻音乐，乖乖酝酿睡意。", type: "P", icon: "💤" },
                 { text: "看沙雕猫狗视频，或者玩原/农/星铁嘿嘿傻乐。", type: "P", icon: "🎮" },
@@ -183,8 +189,14 @@
                 { text: "哪里有涩图哪里就有我，第一个冲上去要原图的lsp。", type: "S", icon: "📸" },
                 { text: "顶级赛博垃圾桶，什么烂梗废料重口味我都接得住。", type: "S", icon: "🗑️" }
             ]},
+            { axis: "PS", question: "【防平局题】当你看到一张『穿得很严实但透着涩气』的兽图，你会？", options: [
+                { text: "单纯感叹：“哇，画师大大画的衣服质感真好！”", type: "P", icon: "✨" },
+                { text: "只关注人物的脸和背景，完全没往下流的方向想。", type: "P", icon: "👀" },
+                { text: "嘶——（倒吸凉气）这绝对是高手！立刻右键保存当施法材料！", type: "S", icon: "🔥" },
+                { text: "光速放大局部细节，然后在群里发：“嘿嘿嘿...衣服下面一定...”", type: "S", icon: "🔞" }
+            ]},
 
-            // T/M 嘴硬雌小鬼 vs 白给抖M (4选项)
+            // T/M 嘴硬雌小鬼 vs 白给抖M (5题)
             { axis: "TM", question: "如果你在群里犯蠢了被大佬抓住把柄嘲笑，你会？", options: [
                 { text: "涨红了脸疯狂敲键盘反驳：“才、才不是我的错！杂鱼闭嘴！”", type: "T", icon: "🤬" },
                 { text: "直接装死下线，假装无事发生，企图用时间冲淡一切。", type: "T", icon: "🙈" },
@@ -209,8 +221,14 @@
                 { text: "害羞捂脸，耳朵通红，软绵绵地回一句“真的吗……”", type: "M", icon: "😳" },
                 { text: "开心到冒泡，直接凑上去：“那你要做我老公/老婆吗？”", type: "M", icon: "💍" }
             ]},
+            { axis: "TM", question: "【防平局题】如果在一个脑洞设定里，你被强行带上了项圈，你会？", options: [
+                { text: "宁死不屈！疯狂拉扯试图咬断它，嘴里骂骂咧咧。", type: "T", icon: "💥" },
+                { text: "冷哼一声：“你以为这种小玩具就能驯服我？做梦！”", type: "T", icon: "😒" },
+                { text: "假装挣扎一下，然后红着脸小声问：“那个...能松一点点吗？”", type: "M", icon: "👉👈" },
+                { text: "直接放弃思考，乖巧地把牵引绳的另一端递给对方。", type: "M", icon: "🐕" }
+            ]},
 
-            // S/E 发癫社牛 vs 阴暗玉玉 (4选项)
+            // S/E 发癫社牛 vs 阴暗玉玉 (5题)
             { axis: "SE", question: "凌晨三点，你还没睡，通常处于什么精神状态？", options: [
                 { text: "群内疯狂发癫斗图，跟老外跨服聊天，精神极度亢奋。", type: "Sun", icon: "⚡" },
                 { text: "在各大群里来回穿梭，疯狂@人求连麦打游戏。", type: "Sun", icon: "🎧" },
@@ -234,6 +252,12 @@
                 { text: "节奏极其欢快、每分钟180拍的洗脑日系电音。", type: "Sun", icon: "🎧" },
                 { text: "没有任何起伏的、舒缓轻柔的助眠纯音乐。", type: "Emo", icon: "📻" },
                 { text: "带有雨声白噪音的凄美钢琴曲，听了想跳楼那种。", type: "Emo", icon: "🎹" }
+            ]},
+            { axis: "SE", question: "【防平局题】在群聊里突然冷场，已经10分钟没人说话了，你会？", options: [
+                { text: "直接甩出一张极其炸裂的沙雕梗图/涩图强行引爆全场！", type: "Sun", icon: "💣" },
+                { text: "发个『人呢？都死啦？』然后疯狂@群主出来挨打。", type: "Sun", icon: "📢" },
+                { text: "正好，反正我也融不进去，默默关掉群聊潜水。", type: "Emo", icon: "🤿" },
+                { text: "觉得是不是自己刚才说错话把大家聊死了，开始严重精神内耗。", type: "Emo", icon: "🌀" }
             ]}
         ];
 
@@ -243,7 +267,7 @@
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
-        // 打乱题目顺序
+        // 打乱题目
         shuffle(quizData);
 
         const resultTypes = {
@@ -371,7 +395,7 @@
                     <div class="text-6xl md:text-7xl mb-4 shake-crazy">🤡</div>
                     <h1 class="text-2xl md:text-3xl font-black text-pink-600 mb-2 drop-shadow-sm">赛博小兽太<br>成分鉴定器</h1>
                     <p class="text-xs md:text-sm font-bold bg-yellow-300 text-red-600 inline-block px-3 py-1 rounded-full mb-6 transform -rotate-3 border-2 border-red-600">
-                        V9.5 究极多选题版
+                        V10.0 精准防平局版
                     </p>
                     <div class="text-slate-600 mb-8 font-bold text-sm bg-pink-50 p-4 rounded-xl border-2 border-pink-200 text-left leading-relaxed">
                         <p class="mb-2">🥵 扒开你虚伪的伪装！直面最肮脏的性癖！</p>
@@ -396,7 +420,7 @@
         function renderQuestion() {
             const q = quizData[currentQuestionIndex];
             const progress = ((currentQuestionIndex) / quizData.length) * 100;
-            counterEl.innerText = `第 ${currentQuestionIndex + 1} 题 / 共 16 题`;
+            counterEl.innerText = `第 ${currentQuestionIndex + 1} 题 / 共 20 题`;
 
             const html = `
                 <div class="max-w-xl w-full">
@@ -464,10 +488,13 @@
             const r1 = scores.D > scores.C ? 'D' : 'C';
             const r2 = scores.P > scores.S ? 'P' : 'S';
             const r3 = scores.T > scores.M ? 'T' : 'M';
-            const r4 = scores.Sun > scores.Emo ? 'S' : 'E';
-            const finalCode = r1 + r2 + r3 + r4;
+            const r4 = scores.Sun > scores.Emo ? 'Sun' : 'Emo';
             
-            const result = resultTypes[finalCode] || resultTypes["CSTS"]; // 容错后备
+            // 将Sun映射回S，Emo映射回E生成Code
+            const codeR4 = r4 === 'Sun' ? 'S' : 'E';
+            const finalCode = r1 + r2 + r3 + codeR4;
+            
+            const result = resultTypes[finalCode] || resultTypes["CSTS"];
             
             const html = `
                 <div class="max-w-xl w-full pb-10 mt-6">
