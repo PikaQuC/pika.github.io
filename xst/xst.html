@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -108,6 +107,26 @@
             border: 2px solid #cbd5e1;
             border-radius: 0.5rem;
         }
+
+        .tier-badge {
+            display: inline-block;
+            font-weight: 900;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            border: 2px solid rgba(255,255,255,0.8);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+        }
+        .tier-UR { background: linear-gradient(45deg, #fbbf24, #f59e0b, #ef4444, #ec4899, #8b5cf6); background-size: 200% 200%; animation: gradient-shift 3s ease infinite; color: white; border-color: #fbbf24;}
+        .tier-SSR { background: linear-gradient(45deg, #ef4444, #f97316); color: white; border-color: #fca5a5;}
+        .tier-SR { background: linear-gradient(45deg, #8b5cf6, #d946ef); color: white; border-color: #d8b4fe;}
+        .tier-R { background: linear-gradient(45deg, #3b82f6, #06b6d4); color: white; border-color: #93c5fd;}
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -115,12 +134,12 @@
     <header class="fixed top-0 w-full z-50">
         <div class="marquee-container text-sm md:text-base">
             <span class="marquee-text">
-                ⚠️ 警告：本测试已加入防平局机制！这次你休想再隐瞒你真实的性癖！ 💦 测完记得分享到群里公开处刑！ 🤡
+                ⚠️ 警告：已加入【全网发病概率】统计！测出极低概率 UR 的病友建议直接入院治疗！ 💦 测完记得分享到群里攀比病情！ 🤡
             </span>
         </div>
         <div class="bg-white/90 backdrop-blur-sm border-b-4 border-pink-400 px-4 py-3 flex justify-between items-center shadow-md">
             <div class="font-black text-lg md:text-xl text-pink-600 flex items-center gap-2">
-                <span class="shake-crazy">🐶</span> 小兽太图鉴 V10.0
+                <span class="shake-crazy">🐶</span> 小兽太图鉴 V11.0 抽卡版
             </div>
             <div id="question-counter" class="bg-pink-500 text-white px-3 py-1 rounded-full font-black text-sm shadow-[2px_2px_0px_#831843]"></div>
         </div>
@@ -129,135 +148,148 @@
     <main class="flex-grow flex items-center justify-center pt-28 px-4 pb-12 w-full" id="app-container">
     </main>
 
+    <!-- 底部版权与赞助信息 -->
+    <footer class="w-full text-center py-4 bg-white/90 backdrop-blur-sm border-t-4 border-pink-400 relative z-40 text-sm font-black text-slate-700 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] mt-auto">
+        <div class="flex flex-col md:flex-row justify-center items-center gap-3 md:gap-6">
+            <!-- 替换 href 里的链接为你实际的抖音主页链接 -->
+            <a href=" https://v.douyin.com/etZxUXNpIuQ/ 7@5.com :5pm" target="_blank" class="hover:text-pink-500 hover:-translate-y-1 transition-all flex items-center gap-1 bg-pink-50 px-4 py-1.5 rounded-full border-2 border-pink-200 shadow-sm">
+                🎨 制作人：皮卡
+            </a>
+            <!-- 替换 href 里的链接为你实际的赞助商/店铺链接 -->
+            <a href="https://qm.qq.com/q/dCx7cuvxXG" target="_blank" class="hover:text-blue-500 hover:-translate-y-1 transition-all flex items-center gap-1 bg-blue-50 px-4 py-1.5 rounded-full border-2 border-blue-200 shadow-sm">
+                👕 赞助：索狛睡衣铺
+            </a>
+        </div>
+    </footer>
+
     <script>
-        // 升级为20题，确保每个维度5道题，彻底杜绝平局
         const quizData = [
-            // D/C 舔狗 vs 傲娇 (5题)
+            // D/C (舔狗/傲娇) - 正常到极端
             { axis: "DC", question: "看到列表里的大佬/喜欢的兽太发了张超好看的自拍，你的第一反应？", options: [
-                { text: "“汪汪汪汪汪！老公/老婆踩我！狠狠撅我！” 直接扑上去狂舔。", type: "D", icon: "👅" },
-                { text: "秒赞秒评论转发三连：“太帅了/太可爱了！多发爱看！”", type: "D", icon: "🥺" },
-                { text: "默默保存原图，但在评论区发个沙雕表情包掩饰激动。", type: "C", icon: "😶" },
-                { text: "保存原图，设为壁纸，然后高冷回复：“还行，也就那样吧。”", type: "C", icon: "😒" }
+                { text: "秒赞并评论：“拍得真好看！今天也辛苦啦~”", type: "D", icon: "🥺" },
+                { text: "默默点个赞，存下图当做聊天背景。", type: "C", icon: "😶" },
+                { text: "保存原图，高冷回复：“勉勉强强吧。”但私下每天偷偷舔屏。", type: "C", icon: "😒" },
+                { text: "“汪汪汪汪汪！老公/老婆踩我！狠狠撅我！” 直接扑上去狂发情。", type: "D", icon: "👅" }
             ]},
             { axis: "DC", question: "和基友漫展面基，别人要跟你贴贴，你的身体语言是？", options: [
-                { text: "像无尾熊一样死死抱住对方狂蹭，根本拔不下来。", type: "D", icon: "🫂" },
-                { text: "摇着隐形的尾巴，非常配合地主动凑上去要抱抱。", type: "D", icon: "✨" },
-                { text: "身体僵硬，嘴上说“热死了别碰我”但并没有躲开。", type: "C", icon: "💦" },
-                { text: "满脸嫌弃地推开，骂一句“莫挨老子！谁允许你碰我了！”", type: "C", icon: "💢" }
+                { text: "开心地伸出手，互相轻轻拥抱一下拍个照。", type: "D", icon: "✨" },
+                { text: "稍微有点不好意思，礼貌地保持一点社交距离贴贴。", type: "C", icon: "💦" },
+                { text: "满脸嫌弃地推开，骂一句“莫挨老子！”但其实耳朵已经红透了。", type: "C", icon: "💢" },
+                { text: "像无尾熊一样死死抱住对方狂蹭狂吸，根本拔不下来。", type: "D", icon: "🫂" }
             ]},
             { axis: "DC", question: "如果你有一条具象化的兽人尾巴，平时的状态大概率是？", options: [
-                { text: "像直升机螺旋桨一样疯狂摇摆，看到谁都恨不得起飞。", type: "D", icon: "🚁" },
-                { text: "经常不自觉地垂下来，软趴趴地蹭别人的小腿求摸摸。", type: "D", icon: "🐾" },
-                { text: "平时一动不动，只有在四下无人的时候才会开心地翘一下。", type: "C", icon: "👀" },
-                { text: "高高竖起，警惕性拉满，只允许特定的人碰，碰错就咬。", type: "C", icon: "🐈" }
+                { text: "看到熟人就会开心地摇晃，表达友善。", type: "D", icon: "🐾" },
+                { text: "平时自然下垂，只有情绪激动时才会稍微翘起。", type: "C", icon: "👀" },
+                { text: "高高竖起，警惕性拉满，谁敢摸一下直接咬断他的手。", type: "C", icon: "🐈" },
+                { text: "像直升机螺旋桨一样疯狂摇摆，看到谁都恨不得起飞扑上去。", type: "D", icon: "🚁" }
             ]},
             { axis: "DC", question: "如果有人不小心踩了你一脚，你会？", options: [
-                { text: "赶紧道歉：“对不起！是不是硌到你的脚了？没事吧？”", type: "D", icon: "🧎" },
-                { text: "“嗷呜！”可怜巴巴地蹲在地上看着他，等他来哄你。", type: "D", icon: "🥺" },
-                { text: "瞪他一眼：“走路不长眼？离我远点。”", type: "C", icon: "🙄" },
-                { text: "“杂鱼也敢踩我？！”反手一脚猛踩回去以示威严。", type: "C", icon: "🦷" }
+                { text: "“啊，没事没事，我不疼的。”", type: "D", icon: "🥺" },
+                { text: "“嘶…下次走路小心点啊。”", type: "C", icon: "🙄" },
+                { text: "“杂鱼也敢踩我？！”反手一脚猛踩回去，还要碾两下以示威严。", type: "C", icon: "🦷" },
+                { text: "赶紧滑跪道歉：“对不起！是不是我的脚硌到您了？请狠狠惩罚我！”", type: "D", icon: "🧎" }
             ]},
-            { axis: "DC", question: "【防平局题】如果群里有人突然送了你一份很想要的礼物，你的反应是？", options: [
-                { text: "“哇！太爱你了！”直接发一万个磕头和狂亲的表情包。", type: "D", icon: "😭" },
-                { text: "极其感动，马上开始发愁要买什么同等价值的回礼。", type: "D", icon: "🎁" },
-                { text: "内心狂喜，但只轻飘飘地回一句：“谢了，破费。”", type: "C", icon: "☕" },
-                { text: "别扭地转过头：“哼，既然你非要送，那我就勉强收下吧。”", type: "C", icon: "撇嘴" }
+            { axis: "DC", question: "如果群里有人突然送了你一份很想要的礼物，你的反应是？", options: [
+                { text: "很高兴地道谢，并记在心里准备下次买回礼。", type: "D", icon: "🎁" },
+                { text: "礼貌地回复：“谢谢，让你破费了。”", type: "C", icon: "☕" },
+                { text: "别扭地转头：“哼，既然你非要送，那我就勉强收下吧，才没有很高兴！”", type: "C", icon: "撇嘴" },
+                { text: "“哇！太爱你了！”发一万个磕头表情包，并宣誓为其做牛做马。", type: "D", icon: "😭" }
             ]},
 
-            // P/S 纯良 vs 满脑废料 (5题)
+            // P/S (纯洁/涩涩) - 正常到极端
             { axis: "PS", question: "晚上一个人躲在被窝里看手机，大概率在干嘛？", options: [
-                { text: "听着白噪音/轻音乐，乖乖酝酿睡意。", type: "P", icon: "💤" },
-                { text: "看沙雕猫狗视频，或者玩原/农/星铁嘿嘿傻乐。", type: "P", icon: "🎮" },
-                { text: "在各个福瑞群和交友软件上疯狂冲浪，到处找乐子。", type: "S", icon: "🌊" },
-                { text: "打开某些蓝色/绿色软件，对着各种重口设定狂流口水。", type: "S", icon: "🤤" }
+                { text: "听着轻音乐，看一会儿正常的搞笑视频/打打游戏就睡了。", type: "P", icon: "💤" },
+                { text: "在各个福瑞群和交友软件上冲浪，看看有没有瓜吃。", type: "S", icon: "🌊" },
+                { text: "戴上耳机听白噪音，双手放在胸口，像个纯洁小天使一样安详入睡。", type: "P", icon: "😇" },
+                { text: "疯狂浏览重口设定、小蓝鸟涩图，寻找今晚的施法材料。", type: "S", icon: "🤤" }
             ]},
             { axis: "PS", question: "你的手机相册如果不小心被父母/同学打开，会发生什么？", options: [
-                { text: "全是风景照、沙雕表情包，干干净净坦坦荡荡！", type: "P", icon: "😇" },
-                { text: "有点二次元浓度，但勉强能跟家人解释为“动画片”。", type: "P", icon: "📺" },
-                { text: "拼死护住手机！里面有很多见不得光的擦边涩图和本子。", type: "S", icon: "🚨" },
-                { text: "当场触发十级社死警报，连夜买站票逃离太阳系。", type: "S", icon: "💀" }
+                { text: "全是风景照、美食和正常游戏截图，干干净净坦坦荡荡！", type: "P", icon: "📸" },
+                { text: "有些二次元梗图和一点点微擦边，勉强能糊弄过去。", type: "S", icon: "📺" },
+                { text: "连一张稍微露点肉的图都没有，全家老小看一圈直呼三好学生。", type: "P", icon: "✨" },
+                { text: "当场触发十级社死警报！满屏R18本子和重口图，连夜逃离太阳系。", type: "S", icon: "💀" }
             ]},
             { axis: "PS", question: "听到别人对你说“你好骚啊”，你的反应？", options: [
-                { text: "黑人问号：“你在说什么猪话？我明明是清纯大男主！”", type: "P", icon: "❓" },
-                { text: "瞬间脸红反驳：“我不是！我没有！别瞎说！”", type: "P", icon: "😳" },
-                { text: "挑眉回敬：“这就骚了？我还有更骚的你要看吗？”", type: "S", icon: "💅" },
-                { text: "娇羞一笑，夹起嗓子：“嘿嘿，哥哥喜欢吗~”", type: "S", icon: "💦" }
+                { text: "愣一下：“你在说啥？我哪里骚了？”", type: "P", icon: "❓" },
+                { text: "嘿嘿一笑：“是吗？谢谢夸奖。”", type: "S", icon: "💅" },
+                { text: "瞬间脸红到脖子根，疯狂摆手：“我不是！我没有！别瞎说！”", type: "P", icon: "😳" },
+                { text: "娇羞一笑，直接夹起嗓子：“那哥哥喜欢吗？还有更骚的哦~”", type: "S", icon: "💦" }
             ]},
             { axis: "PS", question: "你对自己在圈子/互联网上的定位是？", options: [
-                { text: "出淤泥而不染的白莲花，三观极正的文明冲浪人。", type: "P", icon: "🌸" },
                 { text: "偶尔跟风发癫的边缘划水群众，主打一个随缘吃瓜。", type: "P", icon: "🍉" },
-                { text: "哪里有涩图哪里就有我，第一个冲上去要原图的lsp。", type: "S", icon: "📸" },
-                { text: "顶级赛博垃圾桶，什么烂梗废料重口味我都接得住。", type: "S", icon: "🗑️" }
+                { text: "喜欢凑热闹，看到美女/帅哥图会去要个原图的正常网友。", type: "S", icon: "👀" },
+                { text: "出淤泥而不染的白莲花，三观极正，看到脏话都要举报的清流。", type: "P", icon: "🌸" },
+                { text: "顶级赛博垃圾桶+老涩批，什么烂梗废料重口味我都接得住！", type: "S", icon: "🗑️" }
             ]},
-            { axis: "PS", question: "【防平局题】当你看到一张『穿得很严实但透着涩气』的兽图，你会？", options: [
-                { text: "单纯感叹：“哇，画师大大画的衣服质感真好！”", type: "P", icon: "✨" },
-                { text: "只关注人物的脸和背景，完全没往下流的方向想。", type: "P", icon: "👀" },
-                { text: "嘶——（倒吸凉气）这绝对是高手！立刻右键保存当施法材料！", type: "S", icon: "🔥" },
-                { text: "光速放大局部细节，然后在群里发：“嘿嘿嘿...衣服下面一定...”", type: "S", icon: "🔞" }
+            { axis: "PS", question: "当你看到一张『穿得很严实但透着涩气』的兽图，你会？", options: [
+                { text: "单纯欣赏画工：“哇，画师大大画的衣服褶皱质感真好！”", type: "P", icon: "✨" },
+                { text: "会注意到一点色气的地方，心里觉得“嘿嘿，不错”。", type: "S", icon: "😏" },
+                { text: "哪怕人物姿势再妖娆，你的注意力也全在背景的树画得多棒上。", type: "P", icon: "🌳" },
+                { text: "光速放大局部细节，然后在群里发情：“嘿嘿嘿...衣服下面一定...”", type: "S", icon: "🔞" }
             ]},
 
-            // T/M 嘴硬雌小鬼 vs 白给抖M (5题)
+            // T/M (嘴硬/白给) - 正常到极端
             { axis: "TM", question: "如果你在群里犯蠢了被大佬抓住把柄嘲笑，你会？", options: [
+                { text: "试图讲理掩饰：“这次只是失误啦，下次肯定不会了！”", type: "T", icon: "🙈" },
+                { text: "发个尴尬挠头的表情包，默默承认自己有点笨。", type: "M", icon: "🥺" },
                 { text: "涨红了脸疯狂敲键盘反驳：“才、才不是我的错！杂鱼闭嘴！”", type: "T", icon: "🤬" },
-                { text: "直接装死下线，假装无事发生，企图用时间冲淡一切。", type: "T", icon: "🙈" },
-                { text: "委屈巴巴地发猫猫流泪表情包，试图卖萌蒙混过关。", type: "M", icon: "🥺" },
-                { text: "光速滑跪，立刻发“对不起我错了，请大神狠狠责罚我！”", type: "M", icon: "🧎" }
+                { text: "光速滑跪，立刻发“对不起我是笨蛋，请大神狠狠辱骂我！”", type: "M", icon: "🧎" }
             ]},
             { axis: "TM", question: "被人按在墙上强行rua耳朵/捏脸，你的战斗状态是？", options: [
-                { text: "誓死不屈！疯狂挣扎，张嘴就要咬人，绝对不服软。", type: "T", icon: "🦷" },
-                { text: "满脸通红地大喊：“放开我！信不信我摇人打你！”", type: "T", icon: "💢" },
-                { text: "象征性挣扎两秒，然后眼神拉丝，身体软成一滩烂泥。", type: "M", icon: "🫠" },
-                { text: "完全放弃抵抗，甚至主动把脸蹭过去求多rua一点。", type: "M", icon: "🥰" }
+                { text: "稍微反抗一下：“喂，别乱摸啦，发型都乱了！”", type: "T", icon: "💢" },
+                { text: "象征性躲闪两下，然后就随缘让对方摸了。", type: "M", icon: "🫠" },
+                { text: "誓死不屈！疯狂挣扎，张嘴就要咬人，绝对不服软！", type: "T", icon: "🦷" },
+                { text: "完全放弃抵抗，眼神拉丝，甚至主动把脸蹭过去求多rua一点。", type: "M", icon: "🥰" }
             ]},
             { axis: "TM", question: "和别人打游戏/跑团，你的核心战术是？", options: [
-                { text: "又菜又爱玩，全程嘴硬指挥，死了全怪队友/骰子不给力。", type: "T", icon: "🎮" },
-                { text: "疯狂独狼操作，企图一打五，然后光速送人头白给。", type: "T", icon: "🐺" },
-                { text: "专门选个辅助/奶妈，死死粘在大佬屁股后面加血保命。", type: "M", icon: "💉" },
-                { text: "专业连体婴挂件，直接躺平喊“哥哥带带我”，让干嘛干嘛。", type: "M", icon: "🎒" }
+                { text: "喜欢玩输出位，偶尔失误了会给自己找个台阶下。", type: "T", icon: "🎮" },
+                { text: "喜欢选个辅助跟着队友，做个安分守己的打工人。", type: "M", icon: "💉" },
+                { text: "疯狂独狼一打五，死了全怪队友/网卡，全程嘴硬指挥。", type: "T", icon: "🐺" },
+                { text: "专业连体婴挂件，躺平喊“哥哥带带我”，让干嘛干嘛绝不反抗。", type: "M", icon: "🎒" }
             ]},
             { axis: "TM", question: "被人当面夸“你今天好可爱哦”，你的表现？", options: [
-                { text: "“哈？你眼睛有毛病吧！本大爷可是无敌猛男！”", type: "T", icon: "💪" },
-                { text: "“少恶心我了变态！离我远点！”（其实心里已经爽翻了）。", type: "T", icon: "💅" },
-                { text: "害羞捂脸，耳朵通红，软绵绵地回一句“真的吗……”", type: "M", icon: "😳" },
-                { text: "开心到冒泡，直接凑上去：“那你要做我老公/老婆吗？”", type: "M", icon: "💍" }
+                { text: "不好意思地挠头：“哪有啦，明明很普通。”", type: "T", icon: "💅" },
+                { text: "开心地回一句“谢谢”，心里暖暖的。", type: "M", icon: "😳" },
+                { text: "瞬间炸毛：“哈？你眼睛有毛病吧！老子可是无敌猛男！”", type: "T", icon: "💪" },
+                { text: "开心到冒泡，直接凑上去抱大腿：“那你要做我老公/老婆吗？”", type: "M", icon: "💍" }
             ]},
-            { axis: "TM", question: "【防平局题】如果在一个脑洞设定里，你被强行带上了项圈，你会？", options: [
-                { text: "宁死不屈！疯狂拉扯试图咬断它，嘴里骂骂咧咧。", type: "T", icon: "💥" },
-                { text: "冷哼一声：“你以为这种小玩具就能驯服我？做梦！”", type: "T", icon: "😒" },
-                { text: "假装挣扎一下，然后红着脸小声问：“那个...能松一点点吗？”", type: "M", icon: "👉👈" },
-                { text: "直接放弃思考，乖巧地把牵引绳的另一端递给对方。", type: "M", icon: "🐕" }
+            { axis: "TM", question: "如果在一个脑洞设定里，你被强行带上了项圈，你会？", options: [
+                { text: "觉得有点中二和羞耻，想要偷偷摘下来。", type: "T", icon: "😒" },
+                { text: "感觉有点怪怪的，但也不好意思拒绝，就先戴着了。", type: "M", icon: "👉👈" },
+                { text: "宁死不屈！疯狂拉扯试图咬断它冷哼：“以为这能驯服我？”", type: "T", icon: "💥" },
+                { text: "直接放弃思考，双膝跪地，乖巧地把牵引绳递给对方并汪了一声。", type: "M", icon: "🐕" }
             ]},
 
-            // S/E 发癫社牛 vs 阴暗玉玉 (5题)
+            // S/E (阳光发癫/阴暗玉玉) - 正常到极端
             { axis: "SE", question: "凌晨三点，你还没睡，通常处于什么精神状态？", options: [
-                { text: "群内疯狂发癫斗图，跟老外跨服聊天，精神极度亢奋。", type: "Sun", icon: "⚡" },
-                { text: "在各大群里来回穿梭，疯狂@人求连麦打游戏。", type: "Sun", icon: "🎧" },
-                { text: "躺在床上盯着天花板，痛苦复盘白天说错的每一句话。", type: "Emo", icon: "🛌" },
-                { text: "听着网易云，在空间/朋友圈发“没人懂我”的emo小作文。", type: "Emo", icon: "🌧️" }
+                { text: "在群里发几张有趣的梗图，然后准备去睡了。", type: "Sun", icon: "🎧" },
+                { text: "觉得有点无聊，随便翻翻朋友圈和空间。", type: "Emo", icon: "🛌" },
+                { text: "社交恐怖分子附体，群内疯狂斗图跨服聊天，精神极度亢奋！", type: "Sun", icon: "⚡" },
+                { text: "听着致郁歌曲，在朋友圈发“没人懂我”的emo小作文，痛哭流涕。", type: "Emo", icon: "🌧️" }
             ]},
             { axis: "SE", question: "去参加大型兽展/漫展，你的行事风格是？", options: [
-                { text: "社交恐怖分子！逮谁跟谁合影，甚至敢当众跳宅舞。", type: "Sun", icon: "🕺" },
-                { text: "疯狂扩列集邮，逢人就热情地塞自己的无料和小卡片。", type: "Sun", icon: "🎁" },
-                { text: "戴着口罩帽子全副武装，只敢远远偷拍喜欢的劳斯。", type: "Emo", icon: "😷" },
-                { text: "躲在角落长蘑菇的阴暗爬行动物，祈祷千万别被熟人认出来。", type: "Emo", icon: "🍄" }
+                { text: "和认识的同好开心面基，要几个无料就心满意足。", type: "Sun", icon: "🎁" },
+                { text: "戴着口罩默默逛摊买周边，不太主动找陌生人说话。", type: "Emo", icon: "😷" },
+                { text: "社交恐怖分子！逮谁跟谁合影，甚至敢在广场中央当众跳宅舞。", type: "Sun", icon: "🕺" },
+                { text: "躲在角落长蘑菇的阴暗爬行类，祈祷别被认出来，一搭话就结巴。", type: "Emo", icon: "🍄" }
             ]},
-            { axis: "SE", question: "看到群里有人发涩图被腾讯封号了，你的反应？", options: [
-                { text: "哈哈哈哈哈笑死我了老逼登！截图发朋友圈狠狠嘲笑！", type: "Sun", icon: "🤣" },
-                { text: "光速保存原图，然后跟着大部队一起排队刷“好似”。", type: "Sun", icon: "🔥" },
-                { text: "叹口气，默默撤回了自己刚想发的图，感觉好孤单。", type: "Emo", icon: "🍂" },
-                { text: "陷入深深的虚无，觉得整个互联网都充满了恶意没意思。", type: "Emo", icon: "🕳️" }
+            { axis: "SE", question: "看到群里有人发重口图被封号了，你的反应？", options: [
+                { text: "跟着大家一起发几个“笑哭”和“好似”的表情包。", type: "Sun", icon: "🔥" },
+                { text: "觉得有点可惜，默默潜水不说话了。", type: "Emo", icon: "🍂" },
+                { text: "哈哈哈哈哈笑死我了老逼登！截图发朋友圈狠狠嘲笑开香槟！", type: "Sun", icon: "🤣" },
+                { text: "陷入深深的虚无，觉得整个互联网都充满了恶意，想要永久退网。", type: "Emo", icon: "🕳️" }
             ]},
             { axis: "SE", question: "如果一定要给你配一首专属BGM，应该是？", options: [
-                { text: "极乐净土、科目三或者某种极度洗脑的土味DJ舞曲。", type: "Sun", icon: "🎵" },
-                { text: "节奏极其欢快、每分钟180拍的洗脑日系电音。", type: "Sun", icon: "🎧" },
-                { text: "没有任何起伏的、舒缓轻柔的助眠纯音乐。", type: "Emo", icon: "📻" },
-                { text: "带有雨声白噪音的凄美钢琴曲，听了想跳楼那种。", type: "Emo", icon: "🎹" }
+                { text: "轻松活泼的流行乐或动漫OP。", type: "Sun", icon: "🎧" },
+                { text: "安静舒缓的纯音乐或民谣。", type: "Emo", icon: "📻" },
+                { text: "极乐净土、科目三或者每分钟200拍的极度洗脑硬核电音。", type: "Sun", icon: "🎵" },
+                { text: "带有雨声白噪音的凄美钢琴曲，听了想跳楼重开那种绝望之音。", type: "Emo", icon: "🎹" }
             ]},
-            { axis: "SE", question: "【防平局题】在群聊里突然冷场，已经10分钟没人说话了，你会？", options: [
-                { text: "直接甩出一张极其炸裂的沙雕梗图/涩图强行引爆全场！", type: "Sun", icon: "💣" },
-                { text: "发个『人呢？都死啦？』然后疯狂@群主出来挨打。", type: "Sun", icon: "📢" },
-                { text: "正好，反正我也融不进去，默默关掉群聊潜水。", type: "Emo", icon: "🤿" },
-                { text: "觉得是不是自己刚才说错话把大家聊死了，开始严重精神内耗。", type: "Emo", icon: "🌀" }
+            { axis: "SE", question: "在群聊里突然冷场，已经10分钟没人说话了，你会？", options: [
+                { text: "发个可爱的猫猫探头表情包，试探一下有没有人在。", type: "Sun", icon: "📢" },
+                { text: "关掉群聊窗口，自己去干别的事情了。", type: "Emo", icon: "🤿" },
+                { text: "直接甩出一张极其炸裂的沙雕梗图强行引爆全场，并疯狂@全体！", type: "Sun", icon: "💣" },
+                { text: "觉得是不是自己刚才说错话把大家聊死了，陷入严重精神内耗。", type: "Emo", icon: "🌀" }
             ]}
         ];
 
@@ -267,109 +299,32 @@
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
-        // 打乱题目
         shuffle(quizData);
 
         const resultTypes = {
-            "DPTS": { 
-                name: "阳光傲娇笨狗💢", color: "bg-orange-400", icon: "🐕",
-                diag: "经赛博精神科鉴定：该个体患有重度『心口不一综合征』并伴有『单细胞生物退化倾向』。",
-                action: "你是个纯纯的热血笨蛋！嘴上天天喊着要日天日地，其实脑子里一根筋，根本不懂成年人的弯弯绕绕。你喜欢在群里装出一副“我很凶”的样子，实际上别人扔个骨头或者夸两句，你的尾巴摇得能发电。被欺负了只会无能狂怒，敲键盘的手都在抖，但在现实里被揉脑袋时又会舒服得眯起眼睛，属于典型的又菜又爱叫。",
-                advice: "对付你只需一招：不管你怎么呲牙咧嘴，强行抱住一顿狂撸，你马上就会停止思考并沦陷。建议每天服用三次『认清自己是个笨比』胶囊。"
-            },
-            "DPTE": { 
-                name: "苦情委屈小土狗🌧️", color: "bg-zinc-500", icon: "🐶",
-                diag: "经鉴定：患有极重度『赛博被害妄想症』及『死要面子活受罪候群』。",
-                action: "你就像雨天被关在门外的小土狗，又纯又惨！你内心极度渴望被关爱，但偏偏长了一张死鸭子嘴硬的脸。被群友调戏或者欺负了，只会死死咬住嘴唇不让自己哭出声，然后躲在角落里阴暗发霉，在朋友圈发仅自己可见的emo小作文。因为太过于傻白甜，经常成为群聊老油条们的恶作剧对象。",
-                advice: "别装硬汉了！你的逞强在别人眼里就像小奶狗护食一样可笑。遇到事别憋着，赶紧找个愿意接盘你的大哥哭诉吧，这才是你的出路。"
-            },
-            "DPSS": { 
-                name: "无脑白给金毛🤤", color: "bg-yellow-400", icon: "🦮",
-                diag: "警报！未发现任何智力活动痕迹，确认为『终极赛博菩萨（物理）』。",
-                action: "你没有任何防备心，谁对你好一点你就恨不得把心肝脾肺肾都掏给人家。你每天就像个快乐的太阳花，毫无底线地疯狂倒贴白给。满脑子都是“贴贴”、“抱抱”，面对任何人的套路都照单全收，被卖了还笑呵呵地帮人数钱。只要对方是个活的，你就能摇着尾巴凑上去舔。",
-                advice: "你就是全网最好拐骗的野生小兽太，人贩子看到你都得笑醒。立刻下载国家反诈APP，并且离那些看着就不像好人的兽圈大叔远一点！"
-            },
-            "DPSE": { 
-                name: "极度缺爱嘤嘤怪🥺", color: "bg-stone-400", icon: "🐾",
-                diag: "重度『情感饥渴症』晚期，体内绿茶素超标，存在严重的依赖转移倾向。",
-                action: "你的纯良掩盖不住你那泛滥成灾的玉玉症！你是个极度缺乏安全感的粘人精，每天除了在群里发“呜呜呜没人在乎我”就是在私聊里疯狂嘤嘤嘤。因为本身没啥心机又极度倒贴，你很容易成为别人招之即来挥之即去的赛博宠物。只要给你一口饭吃，摸摸你的头，你连灵魂都能卖给对方，并且一不理你你就会开始自闭。",
-                advice: "收起你的眼泪！互联网上没人真的心疼赛博眼泪。建议找个坚固的赛博电子厂上班，用高强度的打螺丝来治愈你的emo。"
-            },
+            // R级区
+            "DPME": { tier: "R", prob: "9.8%", name: "极度缺爱嘤嘤怪🥺", color: "bg-stone-400", icon: "🐾", diag: "重度『情感饥渴症』晚期，体内绿茶素超标，存在严重的依赖转移倾向。", action: "你的纯良掩盖不住你那泛滥成灾的玉玉症！你是个极度缺乏安全感的粘人精，每天除了在群里发“呜呜呜没人在乎我”就是在私聊里疯狂嘤嘤嘤。因为本身没啥心机又极度倒贴，很容易成为别人的赛博宠物。只要给你一口饭吃，摸摸头，你连灵魂都能卖，一不理你就会开始自闭。", advice: "收起眼泪！互联网上没人真的心疼赛博眼泪。建议找个坚固的赛博电子厂上班，用高强度的打螺丝来治愈你的emo。" },
+            "CPTE": { tier: "R", prob: "9.2%", name: "苦情委屈小流浪🌧️", color: "bg-zinc-500", icon: "🐱", diag: "经鉴定：患有极重度『赛博被害妄想症』及『死要面子活受罪候群』。", action: "你就像雨天被关在门外的小野猫，又纯又惨！你内心极度渴望被关爱，但长了一张死鸭子嘴硬的脸。被群友欺负了，只会死死咬住嘴唇不让自己哭出声，躲在角落阴暗发霉，发仅自己可见的emo小作文。因为太傻白甜，经常成为群聊老油条的恶作剧对象。", advice: "别装硬汉了！你的逞强在别人眼里就像小护食一样可笑。遇到事别憋着，赶紧找个接盘你的大哥哭诉吧。" },
+            "DPTE": { tier: "R", prob: "8.7%", name: "孤僻流浪小刺猬🗑️", color: "bg-slate-500", icon: "🦔", diag: "重度社恐！『防卫性孤立综合征』，内心戏丰富但表达能力极差。", action: "你像缩在垃圾桶里的流浪小动物。你很单纯，但因为自闭和极度社恐，把所有试图靠近的人都扎出血。每天在阴暗角落独自 emo，一边渴望被领养，一边又在别人伸手时亮爪子。内心弹幕永远是：“别碰我！我脏！”但别人真的走开了，半夜又偷偷掉眼泪。", advice: "再这么别扭下去，真的会孤独终老发霉长毛的。试着收起刺，给别人一个靠近你的机会，哪怕只是发个“早”。" },
+            "CPTS": { tier: "R", prob: "8.3%", name: "炸毛纸老虎猫猫🐈", color: "bg-amber-500", icon: "💥", diag: "外强中干典型病例！『虚假防御机制过载』伴随『晚期傲娇癌』。", action: "传说中的“一碰就哈人，再碰就倒地”纸老虎！心里像白纸一样单纯，但为了保护自己天天装出“莫挨老子”的狂暴姿态。在群里总是怼天怼地，但别人强硬一点把你按住撸两把，你马上就会舒服得打呼噜。死傲娇说的就是你，浑身只有嘴是硬的，其实是个一推就倒的软蛋。", advice: "防御对老涩批形同虚设，反而是欲拒还迎。放弃抵抗坦诚地喵一声，别人给你的罐头会更多。" },
             
-            "DSTS": { 
-                name: "发情小疯狗🔥", color: "bg-red-500", icon: "🐺",
-                diag: "高危预警！『黄体酮/睾酮分泌异常』合并『重度社交狂热症』，破坏力极强。",
-                action: "纯度极高！你是一只满脑子废料、精力旺盛且极具攻击性的哈士奇！你每天在群里上蹿下跳，不仅疯狂开黄腔，还喜欢到处挑衅咬人。你嘴硬得要命，但凡有人敢撅你，你一定要叫唤得比谁都大声。你就是那种“又菜又爱玩，又色又爱跳”的究极乐子人，哪怕被人按在地上摩擦，嘴里还要喊着“就这？没吃饭吗？”",
-                advice: "对付你这种人，最好的办法就是顺着网线过去进行物理阉割。赛博互联网没有你得少一半乐子，但也因为你多了一半的污染源。"
-            },
-            "DSTE": { 
-                name: "病娇地下室狂犬🔗", color: "bg-purple-700", icon: "⛓️",
-                diag: "极度危险！存在严重的『病态反社会人格』与『非法拘禁妄想』。",
-                action: "你脑子里装满了晋江/海棠都不让写的强制爱剧本。你表面是个唯唯诺诺、甚至有些阴暗的修狗，背地里满脑子都是怎么把喜欢的大佬下药绑回地下室。你不仅内心戏极多，还是个重度偏执狂，得不到就毁掉。如果在群里看到别人和你推贴贴，你的屏幕都会被你盯出两个洞，脑子里已经上演了108种暗杀计划。",
-                advice: "你的性癖已经触碰了刑法的边缘。请立刻停止你的脑内危险剧场，多看点《法治进行时》，或者直接去赛博公安局自首吧。"
-            },
-            "DSSS": { 
-                name: "人形自走榨汁机💦", color: "bg-pink-500", icon: "🥵",
-                diag: "逆天！大脑已被黄色废料彻底腐蚀，『不知廉耻综合征』病入膏肓。",
-                action: "你已经彻底没救了！你不仅脑子里全是废料，还是个极度阳光开朗的终极抖M白给怪！你每天像个发情的小泰迪一样抱着别人的大腿狂蹭，甚至会在群里公然大喊“老公干碎我”。你完全没有廉耻心，涩涩就是你每天的第一生产力。你享受被调戏的过程，只要有人开黄腔，你永远是冲在最前面接梗的那个破烂电子榨汁机。",
-                advice: "请立刻穿上裤子！互联网不是法外之地！建议对你进行电子断网处理，让你在清心寡欲的现实生活中反思自己有多变态。"
-            },
-            "DSSE": { 
-                name: "阴暗卑微字母狗🧎", color: "bg-slate-700", icon: "🗑️",
-                diag: "病态受虐狂！确诊为『深渊级斯德哥尔摩综合征』及『尊严丧失症候群』。",
-                action: "你是个把姿态低到尘埃里的重量级抖M！满脑子废料的你，偏偏有着一颗阴暗玉玉的心。你最享受的就是被人狠狠辱骂、贬低和踩在脚底，只有在被当成垃圾对待时，你才能感受到自己活着。每天深夜都在偷偷翻阅各种重口本子并代入受方。别人对你好你会害怕，别人骂你“废物”你反而会兴奋地发抖。",
-                advice: "没啥好说的，尊重，祝福，建议锁死。既然你这么喜欢当垃圾桶，请务必找一个有素质的“垃圾分类员”将你回收利用。"
-            },
+            // SR级区
+            "DPMS": { tier: "SR", prob: "7.8%", name: "无脑白给金毛🤤", color: "bg-yellow-400", icon: "🦮", diag: "警报！未发现任何智力活动痕迹，确认为『终极赛博菩萨（物理）』。", action: "你没有任何防备心，谁对你好一点你就恨不得把心肝脾肺肾都掏给人家。每天像个快乐的太阳花，毫无底线地疯狂倒贴白给。满脑子都是“贴贴”、“抱抱”，面对任何套路都照单全收，被卖了还笑呵呵帮人数钱。只要对方是个活的，就能摇着尾巴凑上去舔。", advice: "全网最好拐骗的野生小兽太，人贩子看到你都得笑醒。立刻下载国家反诈APP，离那些看着不像好人的大叔远一点！" },
+            "DPTS": { tier: "SR", prob: "7.2%", name: "阳光傲娇笨狗💢", color: "bg-orange-400", icon: "🐕", diag: "经赛博精神科鉴定：患有重度『心口不一综合征』并伴有『单细胞生物退化倾向』。", action: "纯纯的热血笨蛋！嘴上喊着日天日地，其实脑子里一根筋，不懂成年人的弯弯绕绕。喜欢装出“我很凶”的样子，实际上别人扔个骨头夸两句，尾巴摇得能发电。被欺负了只会无能狂怒敲键盘，但在现实里被揉脑袋时又会舒服得眯起眼睛，又菜又爱叫。", advice: "对付你只需一招：不管怎么呲牙咧嘴，强行抱住狂撸，你马上停止思考并沦陷。建议每天服用三次『认清自己是个笨比』胶囊。" },
+            "CPME": { tier: "SR", prob: "6.7%", name: "没骨头的废柴软猫🫠", color: "bg-blue-300", icon: "💧", diag: "查无此骨！极度缺乏独立生存能力，确诊『巨婴式依恋障碍』。", action: "患有重度玉玉症的无骨软体生物！没有任何攻击性，遇到困难唯一反应是往地上一躺掉小珍珠。极度依赖他人，恨不得一天24小时挂在别人身上当赛博挂件，没人理就会开始阴暗爬行。纯粹的战五渣，除了会软绵绵撒娇和哭泣外一无是处。", advice: "眼泪和软弱极易激起保护欲，但也极其容易激起施虐狂的欺凌欲。建议买个赛博轮椅，毕竟你根本站不起来。" },
+            "CPMS": { tier: "SR", prob: "6.2%", name: "夹子音绿茶小布偶🍵", color: "bg-emerald-400", icon: "🎀", diag: "高段位绿茶！『心机媚男/女症』确诊，熟练掌握《赛博钓鱼学》。 ", action: "纯纯的“心机”小傻子！虽然脑子没什么黄黑废料，但天生就知道怎么利用可爱的设定骗吃骗喝。每天在群里发卖萌表情包，用夹子音疯狂白给，游刃有余地在大佬之间骗宠爱。装作不经意地发腿照配文“今天好累”，实际上就是在等鱼儿上钩。", advice: "你不是渣，你只是想给所有哥哥一个家！但常在河边走哪有不湿鞋，小心哪天翻车被“哥哥们”联合制裁。" },
 
-            "CPTS": { 
-                name: "炸毛纸老虎猫猫🐱", color: "bg-amber-500", icon: "🐈",
-                diag: "外强中干典型病例！『虚假防御机制过载』伴随『晚期傲娇癌』。",
-                action: "你就是传说中的“一碰就哈人，再碰就倒地”的纸老虎！你心里像白纸一样单纯，但为了保护自己，天天装出一副“莫挨老子”的狂暴姿态。你在群里总是怼天怼地，但只要别人强硬一点把你按住撸两把，你马上就会停止呲牙，舒服得打呼噜。死傲娇说的就是你，浑身上下只有嘴是硬的，其实是个一推就倒的软蛋。",
-                advice: "你的防御对老涩批来说形同虚设，反而像是在欲拒还迎。放弃抵抗吧，坦诚地喵一声，别人给你的罐头会更多。"
-            },
-            "CPTE": { 
-                name: "孤僻流浪小刺猬🗑️", color: "bg-slate-500", icon: "🦔",
-                diag: "重度社恐！『防卫性孤立综合征』，内心戏丰富但表达能力极差。",
-                action: "你像一只缩在垃圾桶里的流浪小野猫。你很单纯，但因为自闭和极度社恐，你把所有试图靠近的人都扎出血。你每天在阴暗的角落里独自 emo，一边渴望被领养，一边又在别人伸手时亮出爪子。你的内心弹幕永远是：“别碰我！我脏！不需要你可怜！”但如果别人真的走开了，你又会在半夜偷偷掉眼泪。",
-                advice: "你要是再这么别扭下去，真的会孤独终老发霉长毛的。试着收起刺，给别人一个靠近你的机会，哪怕只是在群里发个“早”。"
-            },
-            "CPSS": { 
-                name: "夹子音绿茶小布偶🍵", color: "bg-emerald-400", icon: "🎀",
-                diag: "高段位绿茶！『心机媚男/女症』确诊，熟练掌握《赛博钓鱼学》。 ",
-                action: "你是个纯纯的“心机”小傻子！虽然脑子里没什么黄黑废料，但你天生就知道怎么利用自己的美貌（或者可爱设定）去骗吃骗喝。你每天在群里发着各种卖萌表情包，用着夹子音疯狂白给，游刃有余地在各个大佬之间疯狂骗宠爱。你装作不经意地发腿照/锁骨照，配文“哎呀今天好累”，实际上就是在等鱼儿上钩。",
-                advice: "你不是渣，你只是想给所有哥哥一个家！但常在河边走哪有不湿鞋，小心哪天翻车被你的“哥哥们”联合起来制裁。"
-            },
-            "CPSE": { 
-                name: "没骨头的废柴软猫🫠", color: "bg-blue-300", icon: "💧",
-                diag: "查无此骨！极度缺乏独立生存能力，确诊『巨婴式依恋障碍』。",
-                action: "你是一只患有重度玉玉症的无骨猫猫软体生物！你没有任何攻击性，遇到困难的唯一反应就是往地上一躺开始掉小珍珠。你极度依赖他人，恨不得一天24小时挂在别人身上当赛博挂件，一旦没人理你就会开始阴暗爬行，散发负能量。你是个纯粹的战五渣，除了会软绵绵地撒娇和哭泣外一无是处。",
-                advice: "你的眼泪和软弱极易激起别人的保护欲，但也极其容易激起施虐狂的欺凌欲。建议买个赛博轮椅，毕竟你根本站不起来。"
-            },
+            // SSR级区
+            "CSTS": { tier: "SSR", prob: "5.7%", name: "嚣张雌小鬼本鬼🤡", color: "bg-fuchsia-500", icon: "💅", diag: "极度欠撅！确诊为『重度嘲讽成瘾』合并『作死无底线症』。", action: "“杂鱼~大叔~这就受不了了？”全网最欠撅的赛博雌小鬼！满脑子花花肠子，最喜欢用嚣张的态度挑逗嘲讽别人。仗着自己身娇体弱疯狂作死，在发癫和被爆金币的边缘横跳。明知道会被教训，但管不住那张犯贱的嘴，最爱看别人气急败坏又拿你没办法的样子。", advice: "这辈子最大的归宿，就是惹错了人，被忍无可忍的大哥按在床上狠狠惩罚，直到哭着求饶叫爸爸！这就是你的最终下场！" },
+            "DSTS": { tier: "SSR", prob: "5.1%", name: "发情小疯狗🔥", color: "bg-red-500", icon: "🐺", diag: "高危预警！『黄体酮/睾酮分泌异常』合并『重度社交狂热症』，破坏力极强。", action: "纯度极高！满脑子废料、精力旺盛且极具攻击性的哈士奇！每天在群里上蹿下跳疯狂开黄腔到处挑衅。嘴硬得要命，但凡有人敢撅你，你叫唤得比谁都大声。那种“又菜又爱玩，又色又爱跳”的究极乐子人，哪怕被人按在地上摩擦，嘴里还要喊“就这？”", advice: "对付你这种人最好的办法就是顺着网线物理阉割。赛博互联网没有你得少一半乐子，但也因为你多了一半污染源。" },
+            "DSME": { tier: "SSR", prob: "4.6%", name: "阴暗卑微字母狗🧎", color: "bg-slate-700", icon: "🗑️", diag: "病态受虐狂！确诊为『深渊级斯德哥尔摩综合征』及『尊严丧失症候群』。", action: "把姿态低到尘埃里的重量级抖M！满脑子废料偏偏有一颗阴暗玉玉的心。最享受被狠狠辱骂、贬低和踩在脚底，只有被当成垃圾对待才能感受到活着。每天深夜偷偷翻重口本子代入受方。别人对你好你会害怕，别人骂你“废物”反而会兴奋地发抖。", advice: "没啥好说的，尊重，祝福，建议锁死。既然这么喜欢当垃圾桶，请务必找一个有素质的“垃圾分类员”回收利用。" },
+            "CSTE": { tier: "SSR", prob: "4.1%", name: "腹黑冰山小毒舌🧊", color: "bg-indigo-600", icon: "😈", diag: "精神SM爱好者！『冷血施虐狂倾向』与『高智商犯罪潜力』持有者。", action: "用最冰冷的表情说出最下流话语的腹黑猫！性格孤僻阴冷，但脑子里的废料比谁都多。最喜欢站在道德高地冷冷嘲讽别人，三言两语把别人内裤扒光。极致的控制狂兼精神施虐者，不喜欢身体接触，就喜欢看别人因为毒舌而破防、无地自容的样子，反派小恶魔。", advice: "毒舌是你最强的武器，但也容易注孤生。建议去学法学，当个无良律师绝对能发挥最大毒性。" },
 
-            "CSTS": { 
-                name: "嚣张雌小鬼本鬼💢", color: "bg-fuchsia-500", icon: "🤡",
-                diag: "极度欠撅！确诊为『重度嘲讽成瘾』合并『作死无底线症』。",
-                action: "“杂鱼~杂鱼大叔~这就受不了了？”没错，你就是全网最欠撅的赛博雌小鬼！你满脑子花花肠子，最喜欢用最嚣张的态度去挑逗和嘲讽别人。你仗着自己身娇体弱疯狂作死，在发癫和被爆金币的边缘疯狂横跳。你明知道自己会被教训，但就是管不住那张犯贱的嘴，最爱看别人被你气急败坏又拿你没办法的样子。",
-                advice: "你这辈子最大的归宿，就是惹错了人，被忍无可忍的大哥按在床上狠狠惩罚，直到哭着求饶叫爸爸！这绝对是你的最终下场！"
-            },
-            "CSTE": { 
-                name: "腹黑冰山小毒舌🧊", color: "bg-indigo-600", icon: "😈",
-                diag: "精神SM爱好者！『冷血施虐狂倾向』与『高智商犯罪潜力』持有者。",
-                action: "你是只用最冰冷的表情说出最下流话语的腹黑猫！你性格孤僻阴冷，但脑子里的废料比谁都多。你最喜欢站在道德高地上冷冷地嘲讽别人，三言两语就能把别人内裤扒光，句句扎心。你是个极致的控制狂兼精神施虐者，你不喜欢身体接触，就喜欢看别人因为你的毒舌而破防、无地自容的样子，纯纯的反派小恶魔。",
-                advice: "你的毒舌是你最强的武器，但也容易让你注孤生。建议去学一下法学，当个无良律师，绝对能发挥你的最大毒性。"
-            },
-            "CSSS": { 
-                name: "诱惑心机小烧杯🍷", color: "bg-rose-500", icon: "🫦",
-                diag: "互联网妲己！体内荷尔蒙超载，确诊『重度海王综合征』与『擦边狂魔』。",
-                action: "你就是行走在互联网上的“魅魔兽太”！你不仅满肚子坏水和废料，还是个极度外向的发电机。表面上装作优雅高冷的小猫咪，私底下疯狂发自拍、擦边图，明码标价地钓鱼。你享受被一群人围着叫“老婆”的虚荣感，你的池塘里养满了各种颜色的鱼，只要有人敢上钩，你就能把他榨得一滴不剩。高端局的顶级猎手！",
-                advice: "海王也是会翻车的！请注意管理你的鱼塘水质，别哪天几条大鱼打起来把你的赛博池塘给掀了。少发点擦边图，小心号没了！"
-            },
-            "CSSE": { 
-                name: "精神分裂病态猫娘🔪", color: "bg-gray-800 text-white", icon: "🩸",
-                diag: "最重量级警告！多种精神疾病复合体，建议立刻送入赛博ICU隔离！",
-                action: "恭喜你，你抽到了最恐怖的图鉴！你是一个极其复杂且危险的病态缝合怪：既满脑废料又极度自闭，既渴望白给被调教，又会在半夜突然玉玉发作想拉着全人类一起毁灭。你一会儿要拿刀杀人，一会儿又跪在地上求人踩你。你的情绪比过山车还刺激，你的群友每天都在心惊胆战地猜测你今天到底忘了吃什么药。",
-                advice: "你的存在本身就是互联网的一颗定时炸弹。除了建议你去挂个精神科专家号之外，我也没什么好说的了。阿弥陀佛。"
-            }
+            // UR级区
+            "DSMS": { tier: "UR", prob: "3.6%", name: "人形自走榨汁机💦", color: "bg-pink-500", icon: "🥵", diag: "逆天罕见病！大脑已被黄色废料腐蚀，『不知廉耻综合征』病入膏肓。", action: "彻底没救了！不仅脑子里全是废料，还是个极度阳光开朗的终极抖M白给怪！每天像个发情小泰迪抱着别人大腿狂蹭，甚至会在群里公然大喊“老公干碎我”。完全没有廉耻心，涩涩就是每天第一生产力。只要有人开黄腔，永远是冲最前面接梗的破烂电子榨汁机。", advice: "立刻穿上裤子！建议进行电子断网处理，让你在清心寡欲的现实生活中反思自己有多变态。" },
+            "DSTE": { tier: "UR", prob: "3.0%", name: "病娇地下室狂犬🔗", color: "bg-purple-700", icon: "⛓️", diag: "极度危险的UR！存在严重的『病态反社会人格』与『非法拘禁妄想』。", action: "脑子里装满了海棠都不让写的强制爱剧本。表面是个唯唯诺诺的阴暗修狗，背地里满脑子都是怎么把喜欢的大佬下药绑回地下室。内心戏极多，是个重度偏执狂，得不到就毁掉。如果在群里看到别人和你推贴贴，屏幕都会被盯出两个洞，脑内上演暗杀计划。", advice: "你的性癖已经触碰刑法边缘。请立刻停止脑内危险剧场，多看点《法治进行时》，或直接去赛博公安局自首。" },
+            "CSMS": { tier: "UR", prob: "2.4%", name: "诱惑心机小烧杯🍷", color: "bg-rose-500", icon: "🫦", diag: "传说级互联网妲己！体内荷尔蒙超载，确诊『重度海王综合征』。", action: "行走在互联网上的“魅魔兽太”！不仅满肚子坏水和废料，还是极度外向的发电机。表面装优雅高冷小猫咪，私下疯狂发自拍擦边图，明码标价钓鱼。享受被一群人围着叫“老婆”的虚荣感，池塘里养满各种鱼，只要有人敢上钩，就能榨得一滴不剩。顶级猎手！", advice: "海王也是会翻车的！请注意管理鱼塘水质，别哪天大鱼打起来把赛博池塘掀了。少发点擦边图，小心号没了！" },
+            "CSME": { tier: "UR", prob: "1.2%", name: "精神分裂病态猫娘🔪", color: "bg-gray-800 text-white", icon: "🩸", diag: "最重量级警告！多种精神疾病复合体，建议立刻送入ICU！", action: "恭喜抽到最恐怖的图鉴！一个极其复杂危险的病态缝合怪：既满脑废料又极度自闭，既渴望白给被调教，又会在半夜突然玉玉发作想拉全人类毁灭。一会儿要拿刀杀人，一会儿又跪在地上求踩。情绪比过山车还刺激，群友每天心惊胆战猜你今天忘了吃什么药。", advice: "你的存在本身就是互联网的一颗定时炸弹。除了建议你去挂个精神科专家号之外，我也没什么好说的了。阿弥陀佛。" }
         };
 
         let currentQuestionIndex = 0;
@@ -381,7 +336,7 @@
             appContainer.innerHTML = htmlContent;
             const content = appContainer.firstElementChild;
             content.classList.add('fade-enter');
-            void content.offsetWidth; 
+            void content.offsetWidth;
             content.classList.add('fade-enter-active');
             setTimeout(() => {
                 content.classList.remove('fade-enter', 'fade-enter-active');
@@ -395,12 +350,12 @@
                     <div class="text-6xl md:text-7xl mb-4 shake-crazy">🤡</div>
                     <h1 class="text-2xl md:text-3xl font-black text-pink-600 mb-2 drop-shadow-sm">赛博小兽太<br>成分鉴定器</h1>
                     <p class="text-xs md:text-sm font-bold bg-yellow-300 text-red-600 inline-block px-3 py-1 rounded-full mb-6 transform -rotate-3 border-2 border-red-600">
-                        V10.0 精准防平局版
+                        V11.0 究极抽卡版 (实装概率)
                     </p>
                     <div class="text-slate-600 mb-8 font-bold text-sm bg-pink-50 p-4 rounded-xl border-2 border-pink-200 text-left leading-relaxed">
-                        <p class="mb-2">🥵 扒开你虚伪的伪装！直面最肮脏的性癖！</p>
-                        <p class="mb-2">💦 测测你到底是<span class="text-pink-500">纯良傻子</span>还是<span class="text-blue-500">废料烧杯</span>？</p>
-                        <p>💢 是欠撅的<span class="text-purple-500">嘴硬雌小鬼</span>，还是随意rua的<span class="text-green-500">白给肉便器</span>？</p>
+                        <p class="mb-2">🥵 直面最肮脏的性癖！鉴定你的专属精神病历！</p>
+                        <p class="mb-2">📊 已接入全网大数据，测出你的<span class="text-purple-600 font-black">真实发病概率</span>！</p>
+                        <p>✨ 看看你是随处可见的量产型，还是全网仅占 1.2% 的<span class="text-red-500 font-black">传说级变态 UR</span>？</p>
                     </div>
                     <button onclick="startQuiz()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-black py-4 px-8 rounded-2xl transition-transform border-b-8 border-pink-700 hover:border-pink-600 hover:translate-y-2 text-lg md:text-xl tracking-wider active:border-b-0 active:translate-y-4">
                         👉 立即扒光底裤 👈
@@ -438,7 +393,7 @@
                         <div class="space-y-4 md:space-y-5">
                             ${q.options.map((opt) => {
                                 return `
-                                <button onclick="selectOption('${opt.type}')" 
+                                <button onclick="selectOption('${opt.type}')"
                                     class="option-card w-full text-left p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 cursor-pointer">
                                     <span class="text-2xl md:text-3xl bg-slate-100 p-2 rounded-full border-2 border-slate-300 shrink-0">${opt.icon}</span>
                                     <span class="text-sm md:text-base text-slate-700 font-bold leading-relaxed">${opt.text}</span>
@@ -490,49 +445,53 @@
             const r3 = scores.T > scores.M ? 'T' : 'M';
             const r4 = scores.Sun > scores.Emo ? 'Sun' : 'Emo';
             
-            // 将Sun映射回S，Emo映射回E生成Code
             const codeR4 = r4 === 'Sun' ? 'S' : 'E';
             const finalCode = r1 + r2 + r3 + codeR4;
             
+            // 现在的 finalCode 绝对能百分之百精准命中 16 种图鉴之一，不会再出现找不到而使用雌小鬼兜底的情况。
             const result = resultTypes[finalCode] || resultTypes["CSTS"];
             
             const html = `
                 <div class="max-w-xl w-full pb-10 mt-6">
                     <div class="bg-[#f8fafc] rounded-3xl shadow-2xl overflow-hidden border-4 border-slate-800">
                         
-                        <!-- 头部 -->
-                        <div class="${result.color} p-6 md:p-8 text-center border-b-4 border-slate-800 relative z-10">
-                            <div class="text-6xl md:text-7xl mb-2 shake-crazy bg-white inline-block rounded-full p-2 border-4 border-slate-800 shadow-[4px_4px_0px_#000]">${result.icon}</div>
-                            <div class="mt-4">
-                                <span class="bg-black text-yellow-400 font-black px-4 py-1 rounded-sm text-xs md:text-sm transform -rotate-2 inline-block border-2 border-white shadow-[2px_2px_0px_rgba(255,255,255,0.5)] tracking-widest">
-                                    绝密成分鉴定报告
+                        <div class="${result.color} p-6 md:p-8 text-center border-b-4 border-slate-800 relative z-10 overflow-hidden">
+                            <div class="absolute inset-0 bg-white/10 mix-blend-overlay"></div>
+                            
+                            <div class="text-6xl md:text-7xl mb-4 shake-crazy bg-white inline-block rounded-full p-2 border-4 border-slate-800 shadow-[4px_4px_0px_#000] relative z-10">${result.icon}</div>
+                            
+                            <div class="mb-2 relative z-10">
+                                <span class="tier-badge tier-${result.tier} text-lg md:text-xl tracking-wider">
+                                    稀有度：${result.tier}
                                 </span>
                             </div>
-                            <h1 class="text-2xl md:text-4xl font-black ${result.color.includes('text-white') ? 'text-white' : 'text-white'} mt-4 drop-shadow-[2px_2px_0px_#000] tracking-wide">${result.name}</h1>
+                            
+                            <div class="mb-3 relative z-10">
+                                <span class="bg-black text-yellow-400 font-black px-3 py-1 rounded-sm text-xs md:text-sm border-2 border-white shadow-[2px_2px_0px_rgba(255,255,255,0.5)]">
+                                    全网发病概率：${result.prob}
+                                </span>
+                            </div>
+                            
+                            <h1 class="text-2xl md:text-4xl font-black ${result.color.includes('text-white') ? 'text-white' : 'text-white'} mt-2 drop-shadow-[2px_2px_0px_#000] tracking-wide relative z-10">${result.name}</h1>
                         </div>
                         
-                        <!-- 详情区 -->
                         <div class="p-5 md:p-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIyIiBmaWxsPSJyZ2JhKDAsMCwwLDAuMDUpIi8+Cjwvc3ZnPg==')] space-y-6 md:space-y-8">
                             
-                            <!-- 诊断 -->
                             <div class="result-section border-red-300 bg-red-50 mt-4 md:mt-0">
                                 <span class="result-section-title text-red-600 border-red-300">🚨 临床确诊</span>
                                 <p class="text-red-700 font-bold leading-relaxed text-sm md:text-base mt-2">${result.diag}</p>
                             </div>
 
-                            <!-- 行为表现 -->
                             <div class="result-section border-blue-300 bg-blue-50">
                                 <span class="result-section-title text-blue-600 border-blue-300">🤡 发病症状</span>
                                 <p class="text-slate-700 font-bold leading-relaxed text-sm md:text-base mt-2 text-justify">${result.action}</p>
                             </div>
 
-                            <!-- 建议 -->
                             <div class="result-section border-emerald-300 bg-emerald-50">
                                 <span class="result-section-title text-emerald-600 border-emerald-300">💊 处方与防身指南</span>
                                 <p class="text-emerald-800 font-bold leading-relaxed text-sm md:text-base mt-2 text-justify">${result.advice}</p>
                             </div>
                             
-                            <!-- 雷达 -->
                             <div class="result-section border-slate-300 bg-white">
                                 <span class="result-section-title text-slate-800 border-slate-300">📊 变态指数雷达</span>
                                 <div class="mt-4">
@@ -543,10 +502,9 @@
                                 </div>
                             </div>
                             
-                            <!-- 按钮区 -->
                             <div class="flex flex-col gap-3 md:gap-4 mt-6 md:mt-8">
                                 <button onclick="copyResult()" id="share-btn" class="w-full bg-green-500 hover:bg-green-600 text-white font-black py-3 md:py-4 px-4 md:px-6 rounded-xl transition-transform border-b-4 border-green-700 hover:translate-y-1 active:border-b-0 active:translate-y-2 text-base md:text-lg flex justify-center items-center gap-2 shadow-lg">
-                                    📢 复制诊断书去群里社死
+                                    📢 炫耀你的 ${result.tier} 级精神病历！
                                 </button>
                                 <button onclick="startQuiz()" class="w-full bg-white hover:bg-slate-100 text-slate-700 font-black py-3 px-6 rounded-xl transition-colors border-2 border-slate-300 shadow-md text-sm md:text-base">
                                     庸医！我不服！重新鉴定！
@@ -566,7 +524,7 @@
             const originalText = btn.innerHTML;
             const res = window.currentResult;
             
-            const shareText = `【赛博精神科诊断书】\n我被查出竟是：${res.icon}「${res.name}」！\n🚨 临床确诊：${res.diag}\n评价是：${res.action.substring(0, 30)}...\n靠！这什么缺德测试！有种你们也来扒底裤！🤡💦`;
+            const shareText = `【赛博小兽太成分鉴定】\n我抽到了概率仅 ${res.prob} 的 [${res.tier}级] 精神病！\n确诊为：${res.icon}「${res.name}」\n评价是：${res.action.substring(0, 30)}...\n靠！这什么缺德测试！不服来攀比一下谁更变态！🤡💦`;
             
             const textarea = document.createElement('textarea');
             textarea.value = shareText;
@@ -575,7 +533,7 @@
             
             try {
                 document.execCommand('copy');
-                btn.innerHTML = `✅ 复制成功！快去群里丢人！`;
+                btn.innerHTML = `✅ 复制成功！快去群里装逼/社死！`;
                 btn.classList.replace('bg-green-500', 'bg-yellow-500');
                 btn.classList.replace('border-green-700', 'border-yellow-700');
             } catch (err) {
@@ -591,13 +549,9 @@
             }, 3000);
         }
 
-        // 初始化
         window.onload = () => {
             renderStart();
         };
     </script>
 </body>
 </html>
-
-
-```
